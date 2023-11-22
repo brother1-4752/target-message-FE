@@ -1,5 +1,7 @@
 import { ComponentType, HTMLAttributes } from 'react'
 import { StyledGeneralLayout } from './GeneralLayout.styled'
+import Sidebar from '../Sidebar/Sidebar'
+import { sidebarData } from '../Sidebar/sidebarContent'
 
 interface GeneralLayoutProps<T> extends HTMLAttributes<T> {}
 
@@ -13,7 +15,7 @@ const withGeneralLayout = <T extends GeneralLayoutProps<T>>(WrappedComponent: Co
           <WrappedComponent {...GeneralLayoutProps} />
         </main>
 
-        <div className="generallayout__sidebar">사이드바</div>
+        <Sidebar sidebarData={sidebarData} />
         <footer className="generallayout__footer">푸터</footer>
       </StyledGeneralLayout>
     )
