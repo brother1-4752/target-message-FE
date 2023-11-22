@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const StyledGeneralLayout = styled.div`
+  width: 100%;
+
   .generallayout__header {
     position: fixed;
     margin-left: 215px;

@@ -17,9 +17,7 @@ interface RouterData {
   withAuth?: boolean
 }
 
-interface SellerRouterData extends RouterData {
-  withAuth?: boolean
-}
+interface SellerRouterData extends RouterData {}
 
 interface AdminRouterData extends RouterData {
   withAuth: true
