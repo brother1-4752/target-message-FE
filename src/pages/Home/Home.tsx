@@ -1,4 +1,6 @@
-const Home = () => {
+import withGeneralLayout from '../../components/common/Layout/GeneralLayout'
+
+const Home = withGeneralLayout(() => {
   const mockSellerId = 123123
   return (
     <div>
@@ -25,6 +27,6 @@ const Home = () => {
       </ul>
     </div>
   )
-}
+})
 
 export default Home

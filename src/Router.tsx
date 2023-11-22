@@ -13,7 +13,7 @@ interface RouterData {
   label: string
   element: React.ReactNode
   errorElement?: React.ReactNode
-  children?: RouterData[]
+  children?: AccessRouterData[]
   withAuth?: boolean
 }
 
@@ -66,6 +66,8 @@ const routerData: AccessRouterData[] = [
         path: 'bizm/admin',
         label: '카카오 비즈엠 어드민페이지',
         element: <BizMAdmin />,
+        withAuth: true,
+        isAdminPage: true,
       },
     ],
   },
