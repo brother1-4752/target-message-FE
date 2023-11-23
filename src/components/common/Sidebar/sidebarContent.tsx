@@ -5,32 +5,22 @@ import { HomeIcon } from '../Icons/Icons'
 const mockSellerName = '애쉬셀러(2333)' // S
 const mockSellerPdCount = 10
 const mockSellerPoint = 1502984
-// const mockAdminName = '김형일(Admin)' // A
+const mockAdminName = '김형일(Admin)' // A
 
 //TODO: id부여해서 인덱스로 접근하게끔 해야 했나?
-interface SidebarData {
+export interface SidebarData {
   label: string
   path?: string
   icon?: React.ReactNode
   hasOnOff?: boolean
   description?: string
-  children?: AccessSidebarData[]
+  children?: SidebarData[]
 }
-
-interface SellerSidebarData extends SidebarData {
-  isPointData?: boolean
-}
-interface AdminSidebarData extends SidebarData {
-  isAdminPage?: boolean
-}
-
-export type AccessSidebarData = SellerSidebarData | AdminSidebarData
 
 //TODO: path 절대경로를 상대경로로 바꿔야 함
-export const sidebarData: AccessSidebarData[] = [
+export const sellerSidebarData: SidebarData[] = [
   {
     label: mockSellerName,
-    path: '/biz-center',
     icon: <HomeIcon />,
   },
   {
@@ -43,40 +33,43 @@ export const sidebarData: AccessSidebarData[] = [
   },
   {
     label: '포인트',
-    // path: '/biz-center/point',
-    path: '/biz-center',
+    path: '/biz-center/point',
+
     icon: <HomeIcon />,
-    isPointData: true,
     description: `${mockSellerPoint} P`,
   },
   {
     label: '공지사항',
-    // path: '/biz-center/notice',
-    path: '/biz-center',
+    path: '/biz-center/notice',
+
     icon: <HomeIcon />,
   },
   {
     label: '광고관리',
-    // path: '/biz-center/ad',
-    path: '/biz-center',
+    path: '/biz-center/ad',
+
     icon: <HomeIcon />,
   },
   {
     label: '광고성과 보고서',
-    // path: '/biz-center/ad-report',
-    path: '/biz-center',
+    path: '/biz-center/ad-report',
+
     icon: <HomeIcon />,
   },
   {
     label: '포인트 관리',
-    // path: '/biz-center/point',
-    path: '/biz-center',
     icon: <HomeIcon />,
+    children: [
+      {
+        label: '비즈 포인트 관리',
+        path: '/biz-center/point',
+      },
+    ],
   },
   {
     label: '단독 구좌 광고',
-    // path: '/biz-center/special-area-ad',
-    path: '/biz-center',
+    path: '/biz-center/special-area-ad',
+
     icon: <HomeIcon />,
   },
   {
@@ -86,58 +79,153 @@ export const sidebarData: AccessSidebarData[] = [
       {
         label: '미디어 믹스 광고상품',
         path: '/biz-center/media-mix/ad',
-        // path: '/biz-center',
       },
       {
         label: '미디어 믹스 광고성과',
-        // path: '/biz-center/media-mix/report',
-        path: '/biz-center',
+        path: '/biz-center/media-mix/report',
+      },
+    ],
+  },
+  {
+    label: '리뷰 체험단 광고',
+    path: '/biz-center/review-ad',
+
+    icon: <HomeIcon />,
+  },
+  {
+    label: '마이페이지',
+    icon: <HomeIcon />,
+    children: [
+      {
+        label: '스토어 정보 변경',
+        path: '/biz-center/store-info',
+      },
+      {
+        label: '대행사 연동 정보',
+        path: '/biz-center/agency-info',
+      },
+      {
+        label: '광고 약정서',
+        path: '/biz-center/ad-contract',
+      },
+    ],
+  },
+  {
+    label: '자주하는 질문',
+    path: '/biz-center/faq',
+
+    icon: <HomeIcon />,
+  },
+  {
+    label: '튜토리얼',
+    path: '/biz-center/tutorial',
+
+    icon: <HomeIcon />,
+  },
+]
+
+export const adminSidebarData: SidebarData[] = [
+  {
+    label: mockAdminName,
+    path: '/biz-center',
+    icon: <HomeIcon />,
+  },
+  {
+    label: '공지사항',
+    path: '/biz-center/notice',
+
+    icon: <HomeIcon />,
+  },
+  {
+    label: '모니터링',
+    path: '/biz-center/monitoring',
+    icon: <HomeIcon />,
+    children: [
+      {
+        label: '상품 조회',
+        path: '/biz-center/monitoring/product',
+      },
+    ],
+  },
+  {
+    label: '광고 정산 관리',
+    path: '/biz-center/ad-settlement',
+
+    icon: <HomeIcon />,
+  },
+  {
+    label: '소재검수 관리',
+    path: '/biz-center/creative-inspection',
+
+    icon: <HomeIcon />,
+    children: [
+      {
+        label: '소재검수',
+        path: '/biz-center/creative-inspection',
+      },
+    ],
+  },
+  {
+    label: '환불 관리',
+    path: '/biz-center/refund',
+
+    icon: <HomeIcon />,
+  },
+  {
+    label: '단독 구좌 관리',
+    path: '/biz-center/special-area',
+
+    icon: <HomeIcon />,
+    children: [
+      {
+        label: '단독 구좌 상품',
+        path: '/biz-center/special-area/product',
+      },
+    ],
+  },
+  {
+    label: '미디어 믹스 관리',
+    icon: <HomeIcon />,
+    children: [
+      {
+        label: '미디어 믹스 애드셋',
+        path: '/biz-center/media-mix/adset',
+      },
+      {
+        label: '미디어 믹스 구매내역',
+        path: '/biz-center/media-mix/purchase-history',
       },
     ],
   },
   {
     label: '관리자 계정 관리',
-    // path: '/biz-center/admin-profile',
-    path: '/biz-center',
-    isAdminPage: true,
+    path: '/biz-center/admin-profile',
+
+    icon: <HomeIcon />,
+  },
+
+  {
+    label: '비즈센터 설정',
+    path: '/biz-center/bizcenter-settings',
+
+    icon: <HomeIcon />,
   },
   {
     label: '비즈센터 설정',
-    // path: '/biz-center/bizcenter-settings',
-    path: '/biz-center',
-    isAdminPage: true,
+    path: '/biz-center/bizcenter-settings',
+
+    icon: <HomeIcon />,
   },
-  // {
-  //   label: '마이페이지',
-  //   icon: <HomeIcon />,
-  //   children: [
-  //     {
-  //       label: '스토어 정보 변경',
-  //       // path: '/biz-center/store-info',
-  //       path: '/biz-center',
-  //     },
-  //     {
-  //       label: '대행사 연동 정보',
-  //       // path: '/biz-center/agency-info',
-  //       path: '/biz-center',
-  //     },
-  //     {
-  //       label: '광고 약정서',
-  //       // path: '/biz-center/ad-contract',
-  //       path: '/biz-center',
-  //     },
-  //   ],
-  // },
   {
     label: '자주하는 질문',
-    // path: '/biz-center/faq',
-    path: '/biz-center',
+    path: '/biz-center/faq',
+
     icon: <HomeIcon />,
   },
   {
     label: '튜토리얼',
-    // path: '/biz-center/tutorial',
-    path: '/biz-center',
+    path: '/biz-center/tutorial',
+
     icon: <HomeIcon />,
   },
 ]

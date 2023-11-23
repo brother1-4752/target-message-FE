@@ -1,9 +1,11 @@
 import { ComponentType, HTMLAttributes } from 'react'
 import { StyledGeneralLayout } from './GeneralLayout.styled'
 import Sidebar from '../Sidebar/Sidebar'
-import { sidebarData } from '../Sidebar/sidebarContent'
+import { adminSidebarData, sellerSidebarData } from '../Sidebar/sidebarContent'
 
 interface GeneralLayoutProps<T> extends HTMLAttributes<T> {}
+
+const USER_TYPE = 'SELLER'
 
 const withGeneralLayout = <T extends GeneralLayoutProps<T>>(WrappedComponent: ComponentType<T>) => {
   const GeneralLayout: React.FC<T> = (GeneralLayoutProps) => {
@@ -15,7 +17,7 @@ const withGeneralLayout = <T extends GeneralLayoutProps<T>>(WrappedComponent: Co
           <WrappedComponent {...GeneralLayoutProps} />
         </main>
 
-        <Sidebar sidebarData={sidebarData} />
+        <Sidebar sidebarData={USER_TYPE === 'SELLER' ? sellerSidebarData : adminSidebarData} />
         <footer className="generallayout__footer">푸터</footer>
       </StyledGeneralLayout>
     )

@@ -1,9 +1,9 @@
 import { StyledSidebar } from './Sidebar.styled'
 import SidebarItem from './SidebarItem'
-import { AccessSidebarData } from './sidebarContent'
+import { SidebarData } from './sidebarContent'
 
 type SidebarProps = {
-  sidebarData: AccessSidebarData[]
+  sidebarData: SidebarData[]
 }
 
 const Sidebar = ({ sidebarData }: SidebarProps) => {

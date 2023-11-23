@@ -1,97 +1,63 @@
 import { useState } from 'react'
-import { OnOffIcon, ToggleDownIcon, ToggleUpIcon } from '../Icons/Icons'
 import { useNavigate } from 'react-router-dom'
+import { SidebarData } from './sidebarContent'
+import { OnOffIcon, ToggleDownIcon } from '../Icons/Icons'
+import styled from 'styled-components'
 
-type SidebarItemProps = {
-  label: string
-  path?: string
-  icon?: React.ReactNode
-  hasOnOff?: boolean
-  description?: string
-  children?: SidebarItemProps[]
-  isPointData?: boolean
-  isAdminPage?: boolean
-}
-
-const SidebarItem = ({
-  label,
-  path,
-  icon,
-  hasOnOff,
-  description,
-  children,
-  isPointData,
-  isAdminPage,
-}: SidebarItemProps) => {
+const SidebarItem = ({ label, path, icon, hasOnOff, description, children }: SidebarData) => {
   const [isToggleOn, setIsToggleOn] = useState(false)
   const naviagte = useNavigate()
 
   return (
     <>
       {children ? (
-        <li style={{ display: 'flex', flexDirection: 'column', alignContent: 'space-between', position: 'relative' }}>
-          <div>
-            <span>{icon}</span>
-            {label}
-            {isToggleOn ? (
-              <ToggleUpIcon style={{ position: 'absolute', right: 0 }} onClick={() => setIsToggleOn((prev) => !prev)} />
-            ) : (
-              <ToggleDownIcon
-                style={{ position: 'absolute', right: 0 }}
-                onClick={() => setIsToggleOn((prev) => !prev)}
-              />
-            )}
+        <StlyedSidebarListWithChildren>
+          <div
+            onClick={() => setIsToggleOn((prev) => !prev)}
+            style={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <div>
+              <span>{icon}</span>
+              <span>{label}</span>
+            </div>
+            {/* TODO: 커스텀 토글 버튼 만들기 */}
+            <ToggleDownIcon />
           </div>
+
           {isToggleOn && (
             <ul>
-              {children.map((item, index) => {
-                return (
-                  <li style={{ background: 'red' }} onClick={() => naviagte(item.path as string)} key={index}>
-                    {item.label}
-                  </li>
-                )
+              {children.map((childSidebarListItem, index) => {
+                return <SidebarItem key={index} {...childSidebarListItem} />
               })}
             </ul>
           )}
-        </li>
+        </StlyedSidebarListWithChildren>
       ) : (
-        <>
-          {isPointData && (
-            <li
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                background: 'linear-gradient(270deg, #A8164A 0%, #A8164A 0.01%, #C2255C 45.83%, #F0365C 100%)',
-              }}
-            >
-              <div>
-                <span>{icon}</span>
-                {label}
-              </div>
-              <p>{description}</p>
-            </li>
-          )}
-          {hasOnOff && (
-            <li style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>{label}</div>
-
-              <OnOffIcon width={44} height={22} />
-            </li>
-          )}
-
-          {!isPointData && !hasOnOff && (
-            <li style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <span>{icon}</span>
-                {label}
-              </div>
-              <p>{description}</p>
-            </li>
-          )}
-        </>
+        <StlyedSidebarList label={label} onClick={() => naviagte(path as string)}>
+          <div>
+            <span>{icon}</span>
+            <span>{label}</span>
+          </div>
+          <div>
+            {hasOnOff && <OnOffIcon width={44} height={22} />}
+            {description && <span>{description}</span>}
+          </div>
+        </StlyedSidebarList>
       )}
     </>
   )
 }
 
 export default SidebarItem
+
+const StlyedSidebarList = styled.li<{ label: string }>`
+  display: flex;
+  justify-content: space-between;
+  background: ${(props) => (props.label === '포인트' ? 'red' : 'inherit')};
+`
+
+const StlyedSidebarListWithChildren = styled.li`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+`
