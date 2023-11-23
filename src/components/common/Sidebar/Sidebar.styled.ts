@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
 export const StyledSidebar = styled.div`
-  color: white;
+  color: #e9ecef;
+  fill: #e9ecef;
 `

@@ -31,7 +31,11 @@ const fontFaces = css`
 
 export const GlobalStyle = createGlobalStyle`
     ${reset}
-    
+
     ${fontFaces}
     
+    html {
+      font-family :  'SpoqaHanSansNeo', 'sans-serif';
+      font-size: var(--font-size14);
+    }
 `
