@@ -2,6 +2,7 @@ import { ComponentType, HTMLAttributes } from 'react'
 import { StyledGeneralLayout } from './GeneralLayout.styled'
 import Sidebar from '../Sidebar/Sidebar'
 import { adminSidebarData, sellerSidebarData } from '../Sidebar/sidebarContent'
+import Header from '../Header/Header'
 
 interface GeneralLayoutProps<T> extends HTMLAttributes<T> {}
 
@@ -11,7 +12,7 @@ const withGeneralLayout = <T extends GeneralLayoutProps<T>>(WrappedComponent: Co
   const GeneralLayout: React.FC<T> = (GeneralLayoutProps) => {
     return (
       <StyledGeneralLayout>
-        <header className="generallayout__header">헤더</header>
+        <Header />
 
         <main className="generallayout__main">
           <WrappedComponent {...GeneralLayoutProps} />
