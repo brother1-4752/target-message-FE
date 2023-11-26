@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { HomeIcon, ListMenuIncon } from '../Icons/Icons'
+import { ClockIcon, HomeIcon, ListMenuIncon } from '../Icons/Icons'
 import { HTMLAttributes } from 'react'
 
 interface HeaderProps extends HTMLAttributes<HTMLHeadingElement> {}
@@ -11,10 +11,10 @@ const Header = (props: HeaderProps) => {
         <ListMenuIncon style={{ marginLeft: '20px' }} />
       </div>
       <div className="header__right">
-        <ListMenuIncon />
+        <ClockIcon />
         <span>03:00:00</span>
         |
-        <HomeIcon marginRight='0' />
+        <HomeIcon width={16} height={16} marginRight="0" />
         <span>브랜디 어드민 바로가기</span>|<span>로그아웃</span>
       </div>
     </StyledHeader>
