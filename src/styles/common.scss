@@ -5,10 +5,14 @@
     --color-white-1 : #fff;
     --color-white-2 : #E9ECEF;
     --color-white-3 : rgb(65 66 71);
+    --color-white-4 : #FAFAFA;
     
     --color-black-1 : #35363A; // 박스, 기본
     --color-black-2 : #27272B; // 박스, 선택
     --color-black-3 : #343A40; //텍스트, 기본
+
+    --color-gray-1 : #929292;
+    --color-gray-2 : rgb(65 66 71);
 
     --color-brown-1 : #603C47;
 
@@ -17,6 +21,7 @@
     // margin, padding
     --padding-1 : 12px 16px 12px 16px;
     --ml-1 : 16px;
+    --ml-2 : 32px;
 
     // 폰트
     --font-size12 : 12px;
@@ -25,4 +30,5 @@
     --font-size18 : 18px;
     --font-size16 : 16px;
     --font-size24 : 24px;
+    --font-size32 : 32px;
 }
