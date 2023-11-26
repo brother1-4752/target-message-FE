@@ -6,7 +6,7 @@ interface HeaderProps extends HTMLAttributes<HTMLHeadingElement> {}
 
 const Header = (props: HeaderProps) => {
   return (
-    <StyledHeader {...props}>
+    <StyledHeader {...props} className="generallayout__header">
       <div>
         <ListMenuIncon style={{ marginLeft: '20px' }} />
       </div>

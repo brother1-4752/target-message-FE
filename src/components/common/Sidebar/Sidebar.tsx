@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { BizTypographyIcon, BrandiIcon, BrandiTypographyIcon } from '../Icons/Icons'
 import { StyledSidebar } from './Sidebar.styled'
 import SidebarItem from './SidebarItem'
@@ -9,20 +10,33 @@ type SidebarProps = {
 }
 
 const SidebarHeader = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    const handlerResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    window.addEventListener('resize', handlerResize)
+    return () => window.removeEventListener('resize', handlerResize)
+  })
   return (
     <div className="sidebar__header">
-      <BrandiIcon width={22} height={22} marginRight="10" />
-      <BrandiTypographyIcon width={80} />
-      <BizTypographyIcon height={22} width={22} />
+      <span>
+        <BrandiIcon width={20} height={20} marginRight="10" />
+        {windowWidth > 992 && (
+          <>
+            <BrandiTypographyIcon width={80} />
+            <BizTypographyIcon height={22} width={22} />
+          </>
+        )}
+      </span>
     </div>
   )
 }
 
 const Sidebar = ({ sidebarData }: SidebarProps) => {
-
-  
   return (
-    <StyledSidebar>
+    <StyledSidebar className="generallayout__sidebar">
       <SidebarHeader />
       <ul>
         {sidebarData.map((sidebarListItem, index) => (

@@ -21,6 +21,7 @@ export const StyledSidebar = styled.div`
     display: flex;
     height: 52px;
     align-items: center;
+    justify-content: center;
     padding: var(--padding-1);
     box-sizing: border-box;
     border-bottom: 1px solid var(--color-white-3);

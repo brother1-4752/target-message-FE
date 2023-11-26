@@ -15,14 +15,59 @@ export const StyledGeneralLayout = styled.div`
   .generallayout__main {
     margin: 52px 0 0 215px;
     background-color: green;
+    display: flex;
   }
 
-  .generallayout__sidebar {
-    width: 215px;
-    height: 100vh;
-    background-color: black;
-    position: fixed;
-    left: 0;
-    top: 0;
+  @media (max-width: 1200px) {
+    .generallayout__main {
+      margin: 52px 0 0 215px;
+    }
+  }
+  @media (max-width: 992px) {
+    .generallayout__header {
+      margin-left: 45px;
+      width: calc(100% - 45px);
+    }
+
+    .generallayout__main {
+      margin: 52px 0 0 45px;
+    }
+
+    .generallayout__sidebar {
+      width: 45px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size13);
+    svg,
+    svg > path {
+      width: var(--font-size13);
+      height: var(--font-size13);
+    }
+    .generallayout__header {
+      margin-left: 0;
+      width: 100%;
+      background-color: var(--color-black-2);
+      color: var(--color-white-2);
+      svg,
+      svg > path {
+        fill: var(--color-white-2);
+      }
+    }
+
+    .generallayout__main {
+      margin: 52px 0 0 0;
+    }
+
+    .generallayout__sidebar {
+      display: none;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .generallayout__main {
+      margin: 52px 0 0 0;
+    }
   }
 `

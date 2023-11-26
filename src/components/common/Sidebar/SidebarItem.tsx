@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SidebarData } from './sidebarContent'
 import { OnOffIcon, ToggleDownIcon, ToggleUpIcon } from '../Icons/Icons'
@@ -17,6 +17,7 @@ const SidebarItem = ({
   depth,
 }: SidebarData) => {
   const [isToggleOn, setIsToggleOn] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const naviagte = useNavigate()
 
   const handleClick = (event: MouseEvent<HTMLLIElement>) => {
@@ -34,22 +35,37 @@ const SidebarItem = ({
     }
   }
 
+  useEffect(() => {
+    const handlerResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    window.addEventListener('resize', handlerResize)
+    return () => window.removeEventListener('resize', handlerResize)
+  })
+
   return (
     <>
-      <Box hasHover={hasHover} isprofile={isprofile} label={label} depth={depth} onClick={handleClick}>
-        <div>
-          <span>{icon}</span>
-          <span>{label}</span>
-        </div>
-        {/* TODO: 커스텀 토글 버튼 만들기 */}
-        <div>
-          {hasOnOff && <OnOffIcon width={44} height={22} />}
-          {description && <span>{description}</span>}
-          {isToggleOn ? children && <ToggleUpIcon /> : children && <ToggleDownIcon />}
-        </div>
-      </Box>
-      {isToggleOn &&
-        children?.map((childSidebarListItem, index) => <SidebarItem key={index} {...childSidebarListItem} />)}
+      {windowWidth > 768 && (
+        <>
+          <Box hasHover={hasHover} isprofile={isprofile} label={label} depth={depth} onClick={handleClick}>
+            <div>
+              <span>{icon}</span>
+              {windowWidth > 992 && <span>{label}</span>}
+            </div>
+            {/* TODO: 커스텀 토글 버튼 만들기 */}
+            {windowWidth > 992 && (
+              <div>
+                {hasOnOff && <OnOffIcon width={44} height={22} />}
+                {description && <span>{description}</span>}
+                {isToggleOn ? children && <ToggleUpIcon /> : children && <ToggleDownIcon />}
+              </div>
+            )}
+          </Box>
+
+          {isToggleOn &&
+            children?.map((childSidebarListItem, index) => <SidebarItem key={index} {...childSidebarListItem} />)}
+        </>
+      )}
     </>
   )
 }
