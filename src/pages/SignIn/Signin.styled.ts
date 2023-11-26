@@ -79,12 +79,12 @@ export const StyledSignIn = styled.div`
             border-radius: 8px;
             margin-bottom: 12px;
             border: 1px solid #e5e5e5;
+            padding-left: 16px;
           }
 
           input::placeholder {
             font-size: var(--font-size12);
             color: #d7d7d7;
-            padding-left: 16px;
           }
         }
 
