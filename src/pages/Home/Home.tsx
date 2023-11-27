@@ -25,7 +25,8 @@ const Home = withGeneralLayout(() => {
 
   return (
     <div>
-      <DataTable />
+      <h1>Home</h1>
+      {/* <DataTable /> */}
 
       {/* <h1>Home</h1> */}
       {/* <form>

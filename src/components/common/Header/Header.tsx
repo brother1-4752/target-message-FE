@@ -30,10 +30,11 @@ const StyledHeader = styled.header`
   top: 0;
   width: calc(100% - 215px);
   height: 52px;
-  background: var(--color-white-2);
+  background: var(--color-white-1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid var(--color-white-2);
 
   .header__right {
     display: flex;

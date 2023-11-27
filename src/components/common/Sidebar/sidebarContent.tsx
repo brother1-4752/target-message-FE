@@ -43,6 +43,25 @@ export const sellerSidebarData: SidebarData[] = [
     description: `${mockSellerPoint} P`,
   },
   {
+    label: '발송 예약 CRM',
+    icon: <HomeIcon />,
+    hasHover: true,
+    children: [
+      {
+        label: '비즈엠',
+        path: '/biz-center/bizm/:sellerNo',
+        hasHover: true,
+        depth: 2,
+      },
+      {
+        label: '앱푸시',
+        path: '/biz-center/app-push/:sellerNo',
+        hasHover: true,
+        depth: 2,
+      },
+    ],
+  },
+  {
     label: '공지사항',
     // path: '/biz-center/notice',
     path: '/',
@@ -103,11 +122,13 @@ export const sellerSidebarData: SidebarData[] = [
       {
         label: '미디어 믹스 광고상품',
         path: '/biz-center/media-mix/ad',
+        hasHover: true,
         depth: 2,
       },
       {
         label: '미디어 믹스 광고성과',
         path: '/biz-center/media-mix/report',
+        hasHover: true,
         depth: 2,
       },
     ],
@@ -168,6 +189,25 @@ export const adminSidebarData: SidebarData[] = [
     path: '/biz-center/notice',
     hasHover: true,
     icon: <HomeIcon />,
+  },
+  {
+    label: '발송 예약 CRM',
+    icon: <HomeIcon />,
+    hasHover: true,
+    children: [
+      {
+        label: '비즈엠',
+        path: '/biz-center/bizm/admin',
+        hasHover: true,
+        depth: 2,
+      },
+      {
+        label: '앱푸시',
+        path: '/biz-center/app-push/admin',
+        hasHover: true,
+        depth: 2,
+      },
+    ],
   },
   {
     label: '모니터링',

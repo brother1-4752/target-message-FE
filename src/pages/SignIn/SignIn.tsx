@@ -76,7 +76,7 @@ const SignIn = () => {
 
         <div className="signin__banners">
           <section className="signin__main--right-top">
-            <img src="banner1.png" alt="banner" width={'100%'} height={'100%'} />
+            <img src='banner1.png' alt="banner" width={'100%'} height={'100%'} />
           </section>
           <section className="signin__main--right-bottom">
             <img src="banner2.png" alt="banner" width={'100%'} height={'100%'} />

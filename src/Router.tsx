@@ -3,10 +3,12 @@ import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
 import SignIn from './pages/SignIn/SignIn'
 import SignUp from './pages/SignUp/SignUp'
-import BizMAdmin from './pages/BizM/BizMAdmin'
-import BizMSeller from './pages/BizM/BizMSeller'
+import BizMAdmin from './pages/Sending/BizM/BizMAdmin'
+import BizMSeller from './pages/Sending/BizM/BizMSeller'
 import ErrorBoundary from './pages/ErrorBoundary/ErrorBoundary'
 import Home from './pages/Home/Home'
+import AppPushSeller from './pages/Sending/AppPush/AppPushSeller'
+import AppPushAdmin from './pages/Sending/AppPush/AppPushAdmin'
 
 interface RouterData {
   path: string
@@ -56,7 +58,7 @@ const routerData: AccessRouterData[] = [
     withAuth: true,
     children: [
       {
-        path: 'bizm/seller/:sellerNo',
+        path: 'bizm/:sellerNo',
         label: '카카오 비즈엠 셀러페이지',
         element: <BizMSeller />,
       },
@@ -64,6 +66,18 @@ const routerData: AccessRouterData[] = [
         path: 'bizm/admin',
         label: '카카오 비즈엠 어드민페이지',
         element: <BizMAdmin />,
+        withAuth: true,
+        isAdminPage: true,
+      },
+      {
+        path: 'app-push/:sellerNo',
+        label: '앱푸시 셀러페이지',
+        element: <AppPushSeller />,
+      },
+      {
+        path: 'app-push/admin',
+        label: '앱푸시 어드민페이지',
+        element: <AppPushAdmin />,
         withAuth: true,
         isAdminPage: true,
       },
