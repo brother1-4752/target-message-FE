@@ -1,7 +1,35 @@
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { BrandiIcon, BrandiTypographyIcon } from '../../components/common/Icons/Icons'
 import { StyledSignIn } from './Signin.styled'
+import axios from 'axios'
 
 const SignIn = () => {
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  const onChangeEmailHandler = (event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)
+  const onChangePasswordHandler = (event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)
+
+  const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const formData = new FormData()
+    formData.append('email', email)
+    formData.append('password', password)
+
+    formData.forEach((value, key) => {
+      console.log(key, value)
+    })
+
+    const response = await axios.post('http://localhost:8080/api/login', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+    console.log(response)
+  }
+
   return (
     <StyledSignIn>
       <header className="signin__header">
@@ -16,13 +44,13 @@ const SignIn = () => {
 
       <main className="signin__main">
         <div className="signin__form--container">
-          <form className="signin__form">
+          <form className="signin__form" onSubmit={onSubmitHandler}>
             <div className="signin__form--title">
               <p>브랜디 어드민 로그인</p>
             </div>
             <div className="signin__form--input">
-              <input type="text" placeholder="셀러 아이디" />
-              <input type="password" placeholder="셀러 비밀번호" />
+              <input type="text" placeholder="셀러 아이디" onChange={onChangeEmailHandler} />
+              <input type="password" placeholder="셀러 비밀번호" onChange={onChangePasswordHandler} />
             </div>
             <div className="signin__form--button">
               <button type="submit">로그인</button>
@@ -39,6 +67,7 @@ const SignIn = () => {
               </div>
             </div>
           </form>
+
           <hr className="signin__hr" />
           <div className="signin__etc">
             <button type="submit">입점 문의</button>

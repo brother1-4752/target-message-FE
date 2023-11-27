@@ -9,6 +9,7 @@ type SidebarProps = {
   sidebarData: SidebarData[]
 }
 
+//TODO: desktop, tablet, mobile에 따라 다른 UI를 보여주도록 수정
 const SidebarHeader = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 

@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { SidebarData } from './sidebarContent'
 import { OnOffIcon, ToggleDownIcon, ToggleUpIcon } from '../Icons/Icons'
 import styled from 'styled-components'
@@ -19,14 +19,20 @@ const SidebarItem = ({
   const [isToggleOn, setIsToggleOn] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const naviagte = useNavigate()
+  const location = useLocation()
 
   const handleClick = (event: MouseEvent<HTMLLIElement>) => {
     event.preventDefault()
-
     setIsToggleOn((prev) => !prev)
     naviagte(path as string)
 
-    event.currentTarget.style.backgroundColor = 'var(--color-black-2)'
+    console.log(event.currentTarget.dataset.path)
+
+    if (location.pathname === event.currentTarget.dataset.path) {
+      event.currentTarget.style.backgroundColor = 'var(--color-black-2)'
+    } else {
+      event.currentTarget.style.backgroundColor = 'var(--color-black-1)'
+    }
 
     if (!isToggleOn) {
       event.currentTarget.style.backgroundColor = 'var(--color-black-2)'
@@ -47,7 +53,14 @@ const SidebarItem = ({
     <>
       {windowWidth > 768 && (
         <>
-          <Box hasHover={hasHover} isprofile={isprofile} label={label} depth={depth} onClick={handleClick}>
+          <Box
+            hasHover={hasHover}
+            isprofile={isprofile}
+            label={label}
+            depth={depth}
+            data-path={path}
+            onClick={handleClick}
+          >
             <div>
               <span>{icon}</span>
               {windowWidth > 992 && <span>{label}</span>}
