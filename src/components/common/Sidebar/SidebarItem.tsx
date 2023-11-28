@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { SidebarData } from './sidebarContent'
 import { OnOffIcon, ToggleDownIcon, ToggleUpIcon } from '../Icons/Icons'
 import styled from 'styled-components'
@@ -19,25 +19,16 @@ const SidebarItem = ({
   const [isToggleOn, setIsToggleOn] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const naviagte = useNavigate()
-  const location = useLocation()
 
   const handleClick = (event: MouseEvent<HTMLLIElement>) => {
     event.preventDefault()
     setIsToggleOn((prev) => !prev)
     naviagte(path as string)
 
-    console.log(event.currentTarget.dataset.path)
-
-    if (location.pathname === event.currentTarget.dataset.path) {
-      event.currentTarget.style.backgroundColor = 'var(--color-black-2)'
-    } else {
-      event.currentTarget.style.backgroundColor = 'var(--color-black-1)'
-    }
-
     if (!isToggleOn) {
-      event.currentTarget.style.backgroundColor = 'var(--color-black-2)'
+      event.currentTarget.style.backgroundColor = '#27272B'
     } else {
-      event.currentTarget.style.backgroundColor = 'var(--color-black-1)'
+      event.currentTarget.style.backgroundColor = '#35363A'
     }
   }
 
@@ -88,7 +79,7 @@ export default SidebarItem
 const PointCssProps = css<{ label: string }>`
   height: ${(props) => (props.label === '포인트' ? '48px' : '40px')};
   font-family: ${(props) => props.label === '포인트' && 'SpoqaHanSansM'};
-  background: ${(props) => props.label === '포인트' && 'var(--color-gradient-1)'};
+  background: ${(props) => props.label === '포인트' && props.theme.color.gradient100};
   cursor: ${(props) => props.label === '포인트' && 'pointer'};
   &:hover {
     animation: ${(props) => props.label === '포인트' && 'fadeIn 3s both'};
@@ -106,15 +97,15 @@ const Box = styled.li<{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--padding-1);
+  padding: ${({ theme }) => theme.spacing.padding100};
   box-sizing: border-box;
-  border-bottom: 1px solid var(--color-white-3);
+  border-bottom: 1px solid ${({ theme }) => theme.color.white300};
   width: 100%;
 
-  background: ${(props) => props.isprofile && 'var(--color-black-2)'};
+  background: ${(props) => props.isprofile && props.theme.color.black200};
   cursor: ${(props) => props.hasHover && 'pointer'};
   &:hover {
-    background: ${(props) => props.hasHover && 'var(--color-black-2)'};
+    background: ${(props) => props.hasHover && props.theme.color.black200};
   }
 
   padding-left: ${(props) => props.depth && `${props.depth * 16}px`};

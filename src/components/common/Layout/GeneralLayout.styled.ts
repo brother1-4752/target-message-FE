@@ -1,90 +1,26 @@
 import styled from 'styled-components'
-import { keyframes } from 'styled-components'
-
-const animation1 = keyframes`
-  from {
-    width: 0;
-  }
-  to {
-    width: 45px;
-  }
-`
-
-const animation2 = keyframes`
-  from {
-    width: 45px;
-  }
-  to {
-    width: 215px;
-  }
-`
-
-const animation3 = keyframes`
-  from {
-    width: 215px;
-  }
-  to {
-    width: 45px;
-  }
-`
-
-const animation4 = keyframes`
-  from {
-    width: 45px;
-  }
-  to {
-    width: 0;
-  }
-`
 
 export const StyledGeneralLayout = styled.div`
   width: 100%;
-  transition: width 0.3s ease-in-out;
+  font-size: ${({ theme }) => theme.font.getSize(14)};
 
-  .generallayout__main {
-    margin: 52px 0 0 215px;
-    background-color: green;
-    display: flex;
-  }
-
-  @media (max-width: 1200px) {
-    .generallayout__main {
-      margin: 52px 0 0 215px;
-    }
-    .generallayout__sidebar {
-      width: 215px;
-    }
-  }
-  @media (max-width: 992px) {
-    .generallayout__header {
-      margin-left: 45px;
-      width: calc(100% - 45px);
-    }
-
-    .generallayout__main {
-      margin: 52px 0 0 45px;
-    }
-
-    .generallayout__sidebar {
-      width: 45px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    font-size: var(--font-size13);
+  /* 스몰 디바이스 (작은 스마트폰 등) */
+  @media only screen and (max-width: 767px) {
+    /* 여기에 768px 미만일 때의 스타일을 작성하세요 */
+    font-size: ${({ theme }) => theme.font.getSize(13)};
     svg,
     svg > path {
-      width: var(--font-size13);
-      height: var(--font-size13);
+      width: ${({ theme }) => theme.font.getSize(13)};
+      height: ${({ theme }) => theme.font.getSize(13)};
     }
     .generallayout__header {
       margin-left: 0;
       width: 100%;
-      background-color: var(--color-black-2);
-      color: var(--color-white-2);
+      background-color: ${({ theme }) => theme.color.black200};
+      color: ${({ theme }) => theme.color.white200};
       svg,
       svg > path {
-        fill: var(--color-white-2);
+        fill: ${({ theme }) => theme.color.white200};
       }
     }
 
@@ -94,13 +30,37 @@ export const StyledGeneralLayout = styled.div`
 
     .generallayout__sidebar {
       width: 0;
-      /* display: none; */
     }
   }
 
-  @media (max-width: 576px) {
+  /* 중간 디바이스 (타블렛 등) */
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    /* 여기에 768px 이상, 992px 미만일 때의 스타일을 작성하세요 */
+    .generallayout__header {
+      margin-left: ${({ theme }) => theme.spacing.sidebarDesktop.left};
+      width: calc(100% - ${({ theme }) => theme.spacing.sidebarDesktop.left});
+    }
+    width: calc(100% - ${({ theme }) => theme.spacing.sidebarDesktop.left});
     .generallayout__main {
-      margin: 52px 0 0 0;
+      margin: ${({ theme }) => theme.spacing.sidebarDesktop.margin};
+    }
+    .generallayout__sidebar {
+      width: ${({ theme }) => theme.spacing.sidebarDesktop.left};
+    }
+  }
+
+  /* 라지 디바이스 (데스크탑 등) */
+  @media only screen and (min-width: 992px) {
+    /* 여기에 992px 이상, 1200px 미만일 때의 스타일을 작성하세요 */
+    .generallayout__header {
+      margin-left: ${({ theme }) => theme.spacing.sidebarLargeDesktop.left};
+    }
+    width: calc(100% - ${({ theme }) => theme.spacing.sidebarLargeDesktop.left});
+    .generallayout__main {
+      margin: ${({ theme }) => theme.spacing.sidebarLargeDesktop.margin};
+    }
+    .generallayout__sidebar {
+      width: ${({ theme }) => theme.spacing.sidebarLargeDesktop.left};
     }
   }
 `

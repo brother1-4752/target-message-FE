@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const StyledSignIn = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: var(--color-white-4);
+  background-color: ${({ theme }) => theme.color.white400};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,8 +30,8 @@ export const StyledSignIn = styled.div`
     }
 
     .signin__header--description {
-      font-size: var(--font-size12);
-      color: var(--color-black-2);
+      font-size: ${({ theme }) => theme.font.getSize(12)};
+      color: ${({ theme }) => theme.color.black200};
       display: flex;
       justify-content: center;
       width: 120px;
@@ -46,13 +46,13 @@ export const StyledSignIn = styled.div`
     display: flex;
     width: 700px;
     height: 550px;
-    margin-top: var(--ml-2);
+    margin-top: ${({ theme }) => theme.spacing.margin300};
 
     .signin__form--container {
       width: 380px;
       height: 518px;
-      background-color: var(--color-white-1);
-      margin: var(--ml-1);
+      background-color: ${({ theme }) => theme.color.white100};
+      margin: ${({ theme }) => theme.spacing.margin100};
       box-sizing: border-box;
       border-radius: 16px;
       padding: 0 24px;
@@ -64,7 +64,7 @@ export const StyledSignIn = styled.div`
         align-items: center;
 
         .signin__form--title {
-          font-size: var(--font-size24);
+          font-size: ${({ theme }) => theme.font.getSize(24)};
           font-family: 'SpoqaHanSansB';
           margin-bottom: 16px;
         }
@@ -73,7 +73,7 @@ export const StyledSignIn = styled.div`
           width: 100%;
           display: flex;
           flex-direction: column;
-          margin: var(--ml-1) 0 0 0;
+          margin: ${({ theme }) => theme.spacing.margin100} 0 0 0;
           input {
             height: 36px;
             border-radius: 8px;
@@ -83,19 +83,19 @@ export const StyledSignIn = styled.div`
           }
 
           input::placeholder {
-            font-size: var(--font-size12);
+            font-size: ${({ theme }) => theme.font.getSize(12)};
             color: #d7d7d7;
           }
         }
 
         .signin__form--button {
           width: 100%;
-          margin-bottom: var(--ml-2);
+          margin-bottom: ${({ theme }) => theme.spacing.margin300};
           button {
             width: 100%;
             height: 45px;
             background-color: black;
-            color: var(--color-white-1);
+            color: ${({ theme }) => theme.color.white100};
             border-radius: 8px;
             border: none;
           }
@@ -106,7 +106,7 @@ export const StyledSignIn = styled.div`
           display: flex;
           align-items: center;
           justify-content: space-between;
-          font-size: var(--font-size12);
+          font-size: ${({ theme }) => theme.font.getSize(12)};
 
           .signin__additionals--left {
             display: flex;
@@ -124,17 +124,18 @@ export const StyledSignIn = styled.div`
       }
 
       .signin__hr {
-        margin: var(--ml-2) 0;
+        margin: ${({ theme }) => theme.spacing.margin300} 0;
       }
 
       .signin__etc {
         width: 100%;
-        margin-top: var(--ml-2);
+
+        margin-top: ${({ theme }) => theme.spacing.margin300};
 
         button {
           width: 100%;
           height: 45px;
-          background-color: white;
+          background-color: ${({ theme }) => theme.color.white100};
           color: black;
           border-radius: 8px;
           border: 1px solid #e5e5e5;
@@ -167,13 +168,13 @@ export const StyledSignIn = styled.div`
     position: fixed;
     display: flex;
     justify-content: center;
-    padding-top: var(--ml-2);
+    padding-top: ${({ theme }) => theme.spacing.margin300};
     box-sizing: border-box;
     bottom: 0;
     height: 110px;
     width: 100%;
-    background-color: var(--color-black-2);
-    color: var(--color-white-2);
+    background-color: ${({ theme }) => theme.color.black200};
+    color: ${({ theme }) => theme.color.white200};
 
     .signin__footer {
       width: 700px;
@@ -183,7 +184,7 @@ export const StyledSignIn = styled.div`
         font-size: 11px;
       }
       .signin__footer--bottom {
-        padding-top: var(--ml-1);
+        padding-top: ${({ theme }) => theme.spacing.margin100};
         font-size: 11px;
         text-decoration: underline;
       }

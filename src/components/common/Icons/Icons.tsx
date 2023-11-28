@@ -1,4 +1,5 @@
 import { SVGProps, memo } from 'react'
+import theme from '../../../styles/theme'
 
 interface CustomIconProps extends SVGProps<SVGSVGElement> {
   marginRight?: string
@@ -51,14 +52,14 @@ export const BrandiIcon = memo(({ marginRight = '5', color = '#fff', ...rest }: 
   </svg>
 ))
 
-export const OnOffIcon = memo((props: SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" {...props}>
-    <rect width={44} height={22} fill="#DB4D6E" rx={11} />
+export const OnOffIcon = memo(({ color, width, height, ...rest }: CustomIconProps) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={width ?? '1em'} height={height ?? '1em'} fill="none" {...rest}>
+    <rect width={44} height={22} fill={theme.color.primary100} rx={11} />
     <path
-      fill="#fff"
+      fill={color ?? theme.color.white100}
       d="M13.719 11c0 .844-.153 1.573-.457 2.188-.305.614-.723 1.088-1.254 1.421-.531.334-1.138.5-1.82.5-.683 0-1.29-.166-1.82-.5-.532-.333-.95-.807-1.255-1.421-.304-.615-.457-1.344-.457-2.188 0-.844.153-1.573.457-2.188.305-.614.723-1.088 1.254-1.421.531-.334 1.138-.5 1.82-.5.683 0 1.29.166 1.82.5.532.333.95.807 1.255 1.421.304.615.457 1.344.457 2.188Zm-.938 0c0-.693-.116-1.277-.347-1.754-.23-.476-.54-.837-.934-1.082a2.42 2.42 0 0 0-1.313-.367 2.44 2.44 0 0 0-1.316.367c-.39.245-.702.606-.934 1.082-.229.477-.343 1.061-.343 1.754 0 .693.114 1.277.343 1.754.232.476.543.837.934 1.082a2.44 2.44 0 0 0 1.316.367 2.42 2.42 0 0 0 1.313-.367c.393-.245.704-.606.934-1.082.231-.477.347-1.061.347-1.754Zm8.91-4v8h-.937l-4.36-6.281h-.078V15h-.968V7h.937l4.375 6.297h.078V7h.953Z"
     />
-    <rect width={14} height={14} x={27} y={4} fill="#fff" rx={7} />
+    <rect width={14} height={14} x={27} y={4} fill={theme.color.white100} rx={7} />
   </svg>
 ))
 
@@ -134,7 +135,7 @@ export const ListMenuIncon = memo(({ width = 16, height = 16, marginRight, color
     {...rest}
   >
     <path
-      fill={color ? color : 'var(--color-black-3)'}
+      fill={color ?? theme.color.black300}
       d="M0 96c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zm448 160c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h384c17.7 0 32 14.3 32 32z"
     />
   </svg>
@@ -162,27 +163,25 @@ export const BizTypographyIcon = memo(({ width = 21, height = 11, ...rest }: Cus
   </svg>
 ))
 
-export const SendingIcon = memo(
-  ({ width = 20, height = 20, marginRight = '5', color = 'var(--color-primary-1)', ...rest }: CustomIconProps) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      className="svg-inline--fa fa-chart-user"
-      data-icon="chart-user"
-      data-prefix="fal"
-      viewBox="0 0 640 512"
-      width={width}
-      height={height}
-      style={{ marginRight }}
-      {...rest}
-    >
-      <path
-        fill={color}
-        d="M576 32H224c-17.7 0-32 14.3-32 32v36c-10.2-2.6-21-4-32-4V64c0-35.3 28.7-64 64-64h352c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H336.8c-5.3-11.4-11.8-22.2-19.5-32H576c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32zm-176 96c0-8.8 7.2-16 16-16h96c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16v-57.4L395.3 267.3c-6.2 6.2-16.4 6.2-22.6 0l-80-80c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l68.7 68.7 89.4-89.4H416c-8.8 0-16-7.2-16-16zM160 288a64 64 0 1 0 0-128 64 64 0 1 0 0 128zm0-160a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm-26.7 256c-54.2 0-98.4 42.5-101.2 96h255.8c-2.8-53.5-47-96-101.2-96h-53.4zm0-32h53.3c73.7 0 133.4 59.7 133.4 133.3 0 14.7-11.9 26.7-26.7 26.7H26.7C11.9 512 0 500.1 0 485.3 0 411.7 59.7 352 133.3 352z"
-      />
-    </svg>
-  )
-)
+export const SendingIcon = memo(({ width = 20, height = 20, marginRight = '5', color, ...rest }: CustomIconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    className="svg-inline--fa fa-chart-user"
+    data-icon="chart-user"
+    data-prefix="fal"
+    viewBox="0 0 640 512"
+    width={width}
+    height={height}
+    style={{ marginRight }}
+    {...rest}
+  >
+    <path
+      fill={color ?? theme.color.primary100}
+      d="M576 32H224c-17.7 0-32 14.3-32 32v36c-10.2-2.6-21-4-32-4V64c0-35.3 28.7-64 64-64h352c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H336.8c-5.3-11.4-11.8-22.2-19.5-32H576c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32zm-176 96c0-8.8 7.2-16 16-16h96c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16v-57.4L395.3 267.3c-6.2 6.2-16.4 6.2-22.6 0l-80-80c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l68.7 68.7 89.4-89.4H416c-8.8 0-16-7.2-16-16zM160 288a64 64 0 1 0 0-128 64 64 0 1 0 0 128zm0-160a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm-26.7 256c-54.2 0-98.4 42.5-101.2 96h255.8c-2.8-53.5-47-96-101.2-96h-53.4zm0-32h53.3c73.7 0 133.4 59.7 133.4 133.3 0 14.7-11.9 26.7-26.7 26.7H26.7C11.9 512 0 500.1 0 485.3 0 411.7 59.7 352 133.3 352z"
+    />
+  </svg>
+))
 
 export const ClockIcon = memo(({ width = 16, height = 16, color, ...rest }: CustomIconProps) => (
   <svg
@@ -197,7 +196,7 @@ export const ClockIcon = memo(({ width = 16, height = 16, color, ...rest }: Cust
     {...rest}
   >
     <path
-      fill={color ? color : 'var(--color-black-3)'}
+      fill={color ?? theme.color.black300}
       d="M480 256a224 224 0 1 1-448 0 224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0 256 256 0 1 0-512 0zm240-144v144c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z"
     />
   </svg>

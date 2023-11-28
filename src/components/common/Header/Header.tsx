@@ -26,15 +26,15 @@ export default Header
 //TODO: 215px, 52px 반응형에 맞게 동적으로 바뀌는 변수로 만들기
 const StyledHeader = styled.header`
   position: fixed;
-  margin-left: 215px;
+  margin-left: ${({ theme }) => theme.spacing.sidebarLargeDesktop.left};
   top: 0;
-  width: calc(100% - 215px);
-  height: 52px;
-  background: var(--color-white-1);
+  width: calc(100% - ${({ theme }) => theme.spacing.sidebarLargeDesktop.left});
+  height: ${({ theme }) => theme.spacing.sidebarLargeDesktop.top};
+  background: ${({ theme }) => theme.color.white100};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-white-2);
+  border-bottom: 1px solid ${({ theme }) => theme.color.white200};
 
   .header__right {
     display: flex;
