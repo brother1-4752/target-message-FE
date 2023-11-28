@@ -13,21 +13,30 @@ const SignIn = () => {
   const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const formData = new FormData()
-    formData.append('email', email)
-    formData.append('password', password)
-
-    formData.forEach((value, key) => {
-      console.log(key, value)
-    })
-
-    const response = await axios.post('http://localhost:8080/api/login', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
-    console.log(response)
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/api/post/login',
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+          withCredentials: true,
+          proxy: {
+            host: 'localhost',
+            port: 8080,
+            protocol: 'http',
+          },
+        }
+      )
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -76,7 +85,7 @@ const SignIn = () => {
 
         <div className="signin__banners">
           <section className="signin__main--right-top">
-            <img src='banner1.png' alt="banner" width={'100%'} height={'100%'} />
+            <img src="banner1.png" alt="banner" width={'100%'} height={'100%'} />
           </section>
           <section className="signin__main--right-bottom">
             <img src="banner2.png" alt="banner" width={'100%'} height={'100%'} />
