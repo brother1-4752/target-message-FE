@@ -19,7 +19,6 @@ const withGeneralLayout = <T extends GeneralLayoutProps<T>>(WrappedComponent: Co
         </main>
 
         <Sidebar sidebarData={USER_TYPE === 'SELLER' ? sellerSidebarData : adminSidebarData} />
-        <footer className="generallayout__footer">푸터</footer>
       </StyledGeneralLayout>
     )
   }

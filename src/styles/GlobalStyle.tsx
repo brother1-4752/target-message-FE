@@ -26,15 +26,6 @@ const fontFaces = css`
     font-family: 'SpoqaHanSansL';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Light.woff') format('woff');
   }
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0.6;
-    }
-  }
 `
 
 export const GlobalStyle = createGlobalStyle`

@@ -1,5 +1,33 @@
+//TODO: 재사용 가능하게 리팩토링 필요
+
 // 테이블 헤더 제목
-const tableHeaderContents = [
+export interface HeaderContentProps {
+  key: string
+  value: string
+}
+
+interface TableBodyProps {
+  productNo: number
+  sellerName: string
+  os: string
+  dailyBudget: number
+  campaignPeriod: string | null
+  management: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any
+}
+
+// interface TableBodyProps {
+//   buttonNo: number
+//   buttonType: string
+//   buttonName: string
+//   buttonUrl: number
+//   delete: string | null
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   [key: string]: any
+// }
+
+const tableHeaderContents: HeaderContentProps[] = [
   {
     key: 'productNo',
     value: '상품번호',
@@ -62,11 +90,6 @@ const TableBodyDataLIst = [
   },
 ]
 
-interface HeaderContentProps {
-  key: string
-  value: string
-}
-
 const TableHeader = ({ headerContent }: { headerContent: HeaderContentProps[] }) => {
   // TODO: 헤더 컨텐츠 비어있으면 에러 던지기
   return (
@@ -88,17 +111,6 @@ const TableHeader = ({ headerContent }: { headerContent: HeaderContentProps[] })
 
 // 테이블 헤더 key배열
 const headerKeys = tableHeaderContents.map((item) => item.key)
-
-interface TableBodyProps {
-  productNo: number
-  sellerName: string
-  os: string
-  dailyBudget: number
-  campaignPeriod: string | null
-  management: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
-}
 
 const TableBody = ({ tableBodyDataList }: { tableBodyDataList: TableBodyProps[] }) => {
   //TODO: 바디 컨텐츠 비어있으면 '데이터 없음' UI 보여주기
