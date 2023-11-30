@@ -30,7 +30,6 @@ const StyledHeader = styled.header`
   top: 0;
   width: calc(100% - ${({ theme }) => theme.spacing.sidebarLargeDesktop.left});
   height: ${({ theme }) => theme.spacing.sidebarLargeDesktop.top};
-  background: ${({ theme }) => theme.color.white100};
   display: flex;
   align-items: center;
   justify-content: space-between;

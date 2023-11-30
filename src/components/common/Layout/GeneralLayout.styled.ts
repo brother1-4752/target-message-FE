@@ -4,6 +4,15 @@ export const StyledGeneralLayout = styled.div`
   width: 100%;
   font-size: ${({ theme }) => theme.font.getSize(14)};
 
+  .generallayout__header,
+  .generallayout__main {
+    background-color: ${({ theme }) => theme.color.white400};
+  }
+
+  .generallayout__main {
+    min-height: 100%;
+  }
+
   /* 스몰 디바이스 (작은 스마트폰 등) */
   @media only screen and (max-width: 768px) {
     /* 여기에 768px 미만일 때의 스타일을 작성하세요 */
@@ -40,9 +49,9 @@ export const StyledGeneralLayout = styled.div`
       margin-left: ${({ theme }) => theme.spacing.sidebarDesktop.left};
       width: calc(100% - ${({ theme }) => theme.spacing.sidebarDesktop.left});
     }
-    width: calc(100% - ${({ theme }) => theme.spacing.sidebarDesktop.left});
     .generallayout__main {
       margin: ${({ theme }) => theme.spacing.sidebarDesktop.margin};
+      width: calc(100% - ${({ theme }) => theme.spacing.sidebarDesktop.left});
     }
     .generallayout__sidebar {
       width: ${({ theme }) => theme.spacing.sidebarDesktop.left};
