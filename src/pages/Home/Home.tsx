@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import withGeneralLayout from '../../components/common/Layout/GeneralLayout'
-import { DataTable } from '../../components/dataTable/DataTable'
 
 const Home = withGeneralLayout(() => {
   const mockSellerId = 123123

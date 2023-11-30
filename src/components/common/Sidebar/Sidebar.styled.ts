@@ -11,11 +11,6 @@ export const StyledSidebar = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-  overflow: scroll;
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* 인터넷익스플로러 */
-  user-select: none; /* 표준브라우저 */
 
   .sidebar__header {
     display: flex;

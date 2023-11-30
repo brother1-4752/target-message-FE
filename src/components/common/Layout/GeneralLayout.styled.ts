@@ -5,7 +5,7 @@ export const StyledGeneralLayout = styled.div`
   font-size: ${({ theme }) => theme.font.getSize(14)};
 
   /* 스몰 디바이스 (작은 스마트폰 등) */
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: 768px) {
     /* 여기에 768px 미만일 때의 스타일을 작성하세요 */
     font-size: ${({ theme }) => theme.font.getSize(13)};
     svg,
@@ -34,7 +34,7 @@ export const StyledGeneralLayout = styled.div`
   }
 
   /* 중간 디바이스 (타블렛 등) */
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
+  @media only screen and (min-width: 768.1px) and (max-width: 992px) {
     /* 여기에 768px 이상, 992px 미만일 때의 스타일을 작성하세요 */
     .generallayout__header {
       margin-left: ${({ theme }) => theme.spacing.sidebarDesktop.left};
@@ -50,12 +50,13 @@ export const StyledGeneralLayout = styled.div`
   }
 
   /* 라지 디바이스 (데스크탑 등) */
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 992.1px) {
     /* 여기에 992px 이상, 1200px 미만일 때의 스타일을 작성하세요 */
+
     .generallayout__header {
       margin-left: ${({ theme }) => theme.spacing.sidebarLargeDesktop.left};
+      width: calc(100% - ${({ theme }) => theme.spacing.sidebarLargeDesktop.left});
     }
-    width: calc(100% - ${({ theme }) => theme.spacing.sidebarLargeDesktop.left});
     .generallayout__main {
       margin: ${({ theme }) => theme.spacing.sidebarLargeDesktop.margin};
     }

@@ -23,7 +23,7 @@ const SidebarHeader = () => {
   return (
     <div className="sidebar__header">
       <span>
-        <BrandiIcon width={20} height={20} marginRight="10" />
+        {windowWidth > 768 && <BrandiIcon width={20} height={20} marginRight="10" />}
         {/* TODO: 아래처럼 조건부 거는게 나을지, 아니면 데스크탑/테블릿 나눠서 각각 따로 UI 컴포넌트를 만드는게 나을지 고민하기 */}
         {windowWidth > 992 && (
           <>

@@ -35,7 +35,7 @@ export const GlobalStyle = createGlobalStyle`
     
     html {
       font-family :  'SpoqaHanSansNeo', 'sans-serif';
-      font-size: var(--font-size14);
+      font-size: ${({ theme }) => theme.font.getSize(14)};
     }
 
 `
