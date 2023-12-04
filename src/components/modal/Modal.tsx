@@ -1,4 +1,5 @@
 import { createPortal } from 'react-dom'
+import useLockBodyScroll from '../../hooks/useLockBodyScroll'
 
 interface Image {
   image_type: 'general' | 'wide'
@@ -14,6 +15,7 @@ interface ModalProps {
 
 const Modal = ({ onClose, children }: ModalProps) => {
   const modalRoot = document.getElementById('modal-root')
+  useLockBodyScroll()
 
   if (!modalRoot) return null
 

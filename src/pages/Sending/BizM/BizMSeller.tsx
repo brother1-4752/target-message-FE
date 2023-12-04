@@ -19,9 +19,7 @@ const BizMSeller = () => {
     setDate(event.target.value)
   }
 
-  const openImageSelectionModal = (event: React.FormEvent<HTMLButtonElement>) => {
-    console.log('openImageSelectionModal')
-  }
+  const openImageSelectionModal = (event: React.FormEvent<HTMLButtonElement>) => {}
 
   return (
     <StyledBizMSeller>
