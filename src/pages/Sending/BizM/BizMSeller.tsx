@@ -1,112 +1,8 @@
-/* eslint-disable no-constant-condition */
 import styled from 'styled-components'
 import { HomeIcon, NoImageIcon, SendingIcon } from '../../../components/common/Icons/Icons'
 import { FormEvent, useState } from 'react'
-import Modal, { ImageType, ImageTypeProps } from '../../../components/modal/Modal'
-
-const MockImageCardList: ImageTypeProps = {
-  general: [
-    {
-      id: 1,
-      image_url: 'https://picsum.photos/50/50',
-      image_name: '일반 이미지1',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 2,
-      image_url: 'https://picsum.photos/50/50',
-      image_name: '일반 이미지2',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 3,
-      image_url: 'https://picsum.photos/50/50',
-      image_name: '일반 이미지3',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 4,
-      image_url: 'https://picsum.photos/50/50',
-      image_name: '일반 이미지4',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 5,
-      image_url: 'https://picsum.photos/50/50',
-      image_name: '일반 이미지5',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 6,
-      image_url: 'https://picsum.photos/50/50',
-      image_name: '일반 이미지6',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 7,
-      image_url: 'https://picsum.photos/50/50',
-      image_name: '일반 이미지7',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 8,
-      image_url: 'https://picsum.photos/50/50',
-      image_name: '일반 이미지8',
-      image_link: 'https://brandi.co.kr',
-    },
-  ],
-
-  wide: [
-    {
-      id: 1,
-      image_url: 'https://picsum.photos/80/50',
-      image_name: '와이드 이미지1',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 2,
-      image_url: 'https://picsum.photos/80/50',
-      image_name: '와이드 이미지2',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 3,
-      image_url: 'https://picsum.photos/80/50',
-      image_name: '와이드 이미지3',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 4,
-      image_url: 'https://picsum.photos/80/50',
-      image_name: '와이드 이미지4',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 5,
-      image_url: 'https://picsum.photos/80/50',
-      image_name: '와이드 이미지5',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 6,
-      image_url: 'https://picsum.photos/80/50',
-      image_name: '와이드 이미지6',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 7,
-      image_url: 'https://picsum.photos/80/50',
-      image_name: '와이드 이미지7',
-      image_link: 'https://brandi.co.kr',
-    },
-    {
-      id: 8,
-      image_url: 'https://picsum.photos/80/50',
-      image_name: '와이드 이미지8',
-      image_link: 'https://brandi.co.kr',
-    },
-  ],
-}
+import Modal from '../../../components/modal/Modal'
+import { ImageType, mockImageCardList } from '../../../constants/mockDatas/mockImageCardList'
 
 const BizMSeller = () => {
   //form-data input value
@@ -117,6 +13,7 @@ const BizMSeller = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [imageType, setImageType] = useState<ImageType>('general')
+  //TODO: image_link state 추가 필요
   const [imageUrl, setImageUrl] = useState<string>('')
   const [test, setTest] = useState<string>('')
 
@@ -156,7 +53,6 @@ const BizMSeller = () => {
   }
 
   const onCheckImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // event.preventDefault()
     const image_data = event.currentTarget.dataset.imagedata ?? ''
     const [image_url, image_name] = image_data?.split('+') ?? ['', '', '']
     console.log(image_name)
@@ -295,7 +191,7 @@ const BizMSeller = () => {
       </div>
 
       {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen((prev) => !prev)}>
+        <Modal>
           <div className="modal__wrapper">
             <header className="modal__header">
               <h1>이미지 선택</h1>
@@ -314,7 +210,7 @@ const BizMSeller = () => {
             <input type="radio" name="image_type" id="wide" value="wide" onChange={onChangeImageTypeHandler} />
             <label htmlFor="wide">와이드</label>
             <IamgeCardWrapper>
-              {MockImageCardList[imageType].map((item) => (
+              {mockImageCardList[imageType].map((item) => (
                 <ImageCardBox key={item.id}>
                   <img src={item.image_url} alt={item.image_name} />
                   <p>
