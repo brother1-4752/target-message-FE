@@ -3,37 +3,20 @@ import { HomeIcon, NoImageIcon, SendingIcon } from '../../../components/common/I
 import { FormEvent, useState } from 'react'
 import Modal from '../../../components/modal/Modal'
 import { ImageType, mockImageCardList } from '../../../constants/mockDatas/mockImageCardList'
+import useInput from '../../../hooks/useInput'
 
 const BizMSeller = () => {
-  //form-data input value
-  const [btnUrl, setBtnUrl] = useState<string>('')
-  const [btnName, setBtnName] = useState<string>('')
-  const [date, setDate] = useState<string>('')
-  const [msg, setMsg] = useState<string>('')
+  const [btnName, , onChangeBtnName] = useInput('')
+  const [btnUrl, , onChangeBtnUrl] = useInput('')
+  const [message, , onChangeMessage] = useInput('')
+  const [sendingDate, , onChangeSendingDate] = useInput('')
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [imageType, setImageType] = useState<ImageType>('general')
   //TODO: image_link state 추가 필요
   const [imageUrl, setImageUrl] = useState<string>('')
+  const [currentImageUrl, setCurrentImageUrl] = useState<string>('')
   const [test, setTest] = useState<string>('')
-
-  console.log(imageUrl.length > 0 ? 'true' : 'false')
-
-  const onChangeBtnUrlHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBtnUrl(event.target.value)
-  }
-
-  const onChangeBtnNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBtnName(event.target.value)
-  }
-
-  const onChangeMsg = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMsg(event.target.value)
-  }
-
-  const onChangeDateHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDate(event.target.value)
-  }
 
   const openImageSelectionModal = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -47,33 +30,38 @@ const BizMSeller = () => {
   const onClickImageHandler = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault()
     //TODO: 이미지 아이템 중 src가 일치하는 것을 찾아서 해당 이미지를 미리보기에 띄워줘야 함
-    console.log(imageUrl)
-    console.log(imageType)
+    setImageUrl(currentImageUrl)
     setIsModalOpen(false)
   }
 
   const onCheckImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const image_data = event.currentTarget.dataset.imagedata ?? ''
     const [image_url, image_name] = image_data?.split('+') ?? ['', '', '']
-    console.log(image_name)
 
-    setImageUrl(image_url)
+    setCurrentImageUrl(image_url)
     setTest(image_data)
   }
 
+  // onSubmit
   const onsendingClick = (event: FormEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
+    console.log('btnName: ', btnName)
+    console.log('btnUrl: ', btnUrl)
+    console.log('message: ', message)
+    console.log('sendingDate: ', sendingDate)
+    console.log('imageUrl: ', imageUrl)
+
     //버튼 데이터 리스트는 하나하나 onChange로 데이터 관리 X, 리스트째로 관리해야 함
-    console.log(btnUrl)
-    console.log(btnName)
-    console.log(date)
-    console.log(msg)
-    console.log(imageUrl)
   }
 
-  const onDeleteClick = (event: FormEvent<HTMLButtonElement>) => {
+  const onDeleteBtnTableRow = (event: FormEvent<HTMLButtonElement>) => {
     console.dir(event.currentTarget.parentElement)
+  }
+
+  const deleteImage = (event: FormEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    setImageUrl('')
   }
 
   return (
@@ -99,7 +87,7 @@ const BizMSeller = () => {
                     </span>
                     이미지 선택
                   </button>
-                  <button>
+                  <button onClick={deleteImage}>
                     <span>
                       <HomeIcon />
                     </span>
@@ -151,7 +139,7 @@ const BizMSeller = () => {
                         type="text"
                         placeholder="버튼명"
                         defaultValue={item.name}
-                        onChange={onChangeBtnNameHandler}
+                        onChange={onChangeBtnName}
                         required
                       />
                     </td>
@@ -160,12 +148,12 @@ const BizMSeller = () => {
                         type="text"
                         placeholder="버튼 url"
                         defaultValue={item.url}
-                        onChange={onChangeBtnUrlHandler}
+                        onChange={onChangeBtnUrl}
                         required
                       />
                     </td>
                     <td>
-                      <button onClick={onDeleteClick}>-</button>
+                      <button onClick={onDeleteBtnTableRow}>-</button>
                     </td>
                   </tr>
                 ))}
@@ -178,12 +166,12 @@ const BizMSeller = () => {
           </div>
 
           <div className="message__container">
-            <input type="text" placeholder="기본문구 입력..." onChange={onChangeMsg} />
+            <input type="text" placeholder="기본문구 입력..." onChange={onChangeMessage} />
           </div>
 
           <div className="sending__container">
             <div className="sending__title">발송일자 설정</div>
-            <input type="date" onChange={onChangeDateHandler} />
+            <input type="date" onChange={onChangeSendingDate} />
           </div>
 
           <button onClick={onsendingClick}>발송 예약</button>
