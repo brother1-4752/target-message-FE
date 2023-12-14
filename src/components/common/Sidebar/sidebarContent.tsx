@@ -7,6 +7,56 @@ const mockSellerPdCount = 10
 const mockSellerPoint = 1502984
 const mockAdminName = '김형일(Admin)' // A
 
+interface SellerInfoResponse {
+  sellerId: string
+  sellerNumber: string
+  sellerName: string
+  sellerPoint: string
+  sellerProducts: Product[]
+}
+
+interface AdminInfoResponse {
+  adminId: string
+  amdinName: string
+}
+
+type UserInfoResponse = SellerInfoResponse | AdminInfoResponse
+
+interface Product {
+  product_id: string
+  product_name: string
+  price: string
+  is_sell: string
+  img_url: string
+}
+
+const mockSellerInfoResponse: SellerInfoResponse = {
+  sellerId: 's_1', // pk
+  sellerName: 'nosnos', // 판매자명
+  sellerPoint: '1230000',
+  sellerProducts: [
+    {
+      product_id: 'p_1',
+      product_name: '테스트 상품',
+      price: '10000',
+      is_sell: '판매중',
+      img_url: '테스트 이미지 소스',
+    },
+    {
+      product_id: 'p_2',
+      product_name: '테스트 상품2',
+      price: '50000',
+      is_sell: '품절',
+      img_url: '테스트 이미지 소스2',
+    },
+  ],
+}
+
+const mockAdminInfoResponse: AdminInfoResponse = {
+  adminId: 'a_1',
+  amdinName: '나나나 관리자',
+}
+
 //TODO: id부여해서 인덱스로 접근하게끔 해야 했나?
 export interface SidebarData {
   label: string
