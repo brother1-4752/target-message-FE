@@ -1,29 +1,11 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import styled from 'styled-components'
-import { MouseEvent, useState } from 'react'
 
-import { NoImageIcon, SendingIcon } from '../../../components/common/Icons/Icons'
+import { SendingIcon } from '../../../components/common/Icons/Icons'
+import SellerSearch from './SellerSearch'
+import ImageSetting from './ImageSetting'
 
-//TODO: 실제 API 연동 후 삭제
-//브랜디 셀러번호 기준으로 api 호출
-//예시로, 아래 mockData는 브랜디 셀러번호 1234와 일치한 상품 결제 셀러 정보를 의미한다.
-type ProductPaymentSellerInfoResponse = {
-  ad_product_name: string
-  ad_order_no: string
-  ad_orderer_no: string
-  ad_seller_name: string
-  order_date: string
-}
-
-const mockProductPaymentSellerInfoResponse: ProductPaymentSellerInfoResponse = {
-  ad_product_name: '타겟메세지 A',
-  ad_order_no: '1231231',
-  ad_orderer_no: '1231231231',
-  ad_seller_name: '네모네모네모',
-  order_date: '2023-12-25',
-}
-
-type BizmInputs = {
+export type BizmInputs = {
   sellerNo: string // 타겟메세지 상품 결제 셀러 조회용 셀러번호
   imageUrl: string // 이미지 URL
   imageLink: string // 이미지 클릭 시, 이동할 랜딩페이지 링크
@@ -53,34 +35,10 @@ const BizMSeller = () => {
   // 페칭 데이터로 초기 값 설정하고 싶을 때
   // useForm({ defaultValues: async () => await fetch() })
 
-  const [productPaymentSellerInfo, setProductPaymentSellerInfo] = useState<ProductPaymentSellerInfoResponse | null>(
-    null
-  )
-  const [isShowPreview, setIsShowPreview] = useState<boolean>(false)
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-
-  //controller
-  // 셀러번호 선택
-  const onClickSellerNo = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-
-    const sellerNo = watch('sellerNo')
-
-    if (sellerNo === '1234') setProductPaymentSellerInfo(mockProductPaymentSellerInfoResponse)
-    else setProductPaymentSellerInfo(null)
-  }
+  //functions
 
   //forData submit
   const onSubmitBizm: SubmitHandler<BizmInputs> = (data) => console.log(data)
-
-  // 이미지 설정
-  const onClickPreview = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-
-    //TODO: previewUrl이 set되기 위해, 미리보기 2번 클릭이 필요?! 왜 그런지 트래킹하기
-    watch('imageUrl') ? setPreviewUrl('../../../public/preview-sample.jpg') : setPreviewUrl(null)
-    watch('imageUrl') ? setIsShowPreview(true) : setIsShowPreview(false)
-  }
 
   return (
     <StyledBizMSeller>
@@ -95,65 +53,10 @@ const BizMSeller = () => {
         {/* TODO: 테스트 후, 폴더 파일 스플리팅 */}
         <form className="bizm__form" onSubmit={handleSubmit(onSubmitBizm)}>
           {/* 셀러번호 검색 */}
-          <div className="sellerNo__search">
-            <label htmlFor="sellerNo" className="bizm__sellerNo">
-              브랜디 셀러번호
-            </label>
-            <input type="text" id="sellerNo" {...register('sellerNo', { required: true })} />
-            <button onClick={onClickSellerNo}>검색</button>
-          </div>
-          <div className="sellerNo__info" style={{ width: '100%' }}>
-            {productPaymentSellerInfo && (
-              <div style={{ display: 'flex' }}>
-                {Object.keys(productPaymentSellerInfo).map((key, index) => (
-                  <div style={{ border: '1px solid black', width: '16%' }} key={index}>
-                    {key}
-                  </div>
-                ))}
-              </div>
-            )}
-            {productPaymentSellerInfo && (
-              <div style={{ display: 'flex' }}>
-                {Object.values(productPaymentSellerInfo).map((key, index) => (
-                  <div style={{ border: '1px solid black', width: '16%' }} key={index}>
-                    {key}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <SellerSearch register={register} watch={watch} />
 
           {/* 이미지 설정 */}
-          <div style={{ display: 'flex' }}>
-            <div className="preview__area">
-              <div className="preview__image">
-                {isShowPreview && previewUrl && previewUrl.length > 0 ? (
-                  <img width={100} height={100} src={previewUrl} alt="미리보기 이미지" />
-                ) : (
-                  <NoImageIcon />
-                )}
-              </div>
-            </div>
-            <div>
-              <div style={{ display: 'flex' }}>
-                <label className="image__url" htmlFor="imageUrl">
-                  이미지 URL
-                </label>
-                <input id="imageUrl" type="text" {...register('imageUrl', { required: true })} />
-                <button onClick={onClickPreview}>미리보기</button>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <label htmlFor="imageLink">랜딩페이지 링크 설정</label>
-                <div>
-                  <select defaultValue="http://">
-                    <option value="http://">http://</option>
-                    <option value="https://">https://</option>
-                  </select>
-                  <input type="text" {...register('imageLink', { required: true })} />
-                </div>
-              </div>
-            </div>
-          </div>
+          <ImageSetting register={register} watch={watch} />
 
           {/* 버튼 설정 */}
           <div>
