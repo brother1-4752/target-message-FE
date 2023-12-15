@@ -1,6 +1,49 @@
 import { createGlobalStyle, css } from 'styled-components'
 import reset from 'styled-reset'
 
+export const inputTextFocusAnimation = css`
+  & {
+    font-size: ${({ theme }) => theme.font.getSize(13)};
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border: 1px solid ${({ theme }) => theme.color.gray300};
+    border-radius: 2px;
+    margin-right: 8px;
+    height: 20px;
+  }
+
+  &:focus {
+    border: 1px solid ${({ theme }) => theme.color.primary200};
+    box-shadow: 1px 1px 2px 2px rgba(219, 77, 110, 0.3);
+    outline: none;
+  }
+`
+
+export const buttonHoverAnimation = css`
+  & {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 15px;
+    background-color: ${({ theme }) => theme.color.primary100};
+    border: none;
+    border-radius: 4px;
+    color: ${({ theme }) => theme.color.white100};
+    font-size: ${({ theme }) => theme.font.getSize(12)};
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border: 1px solid rgba(0, 0, 0, 0);
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0);
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.white100};
+    color: ${({ theme }) => theme.color.primary100};
+    border: 1px solid ${({ theme }) => theme.color.primary200};
+    box-shadow: 1px 1px 2px 2px rgba(219, 77, 110, 0.3);
+    outline: none;
+  }
+`
+
 const fontFaces = css`
   @font-face {
     font-family: 'SpoqaHanSans';
