@@ -57,26 +57,26 @@ const SellerSearch = ({ register, watch }: SellerSearchProps) => {
           검색
         </button>
       </StyledSellerSearch>
-      <div className="sellerNo__info" style={{ width: '100%' }}>
+      <StyledSellerNoInfo>
         {productPaymentSellerInfo && (
-          <div style={{ display: 'flex' }}>
+          <div className="sellerInfo__wrapper" style={{ display: 'flex' }}>
             {Object.keys(productPaymentSellerInfo).map((key, index) => (
-              <div style={{ border: '1px solid black', width: '16%' }} key={index}>
+              <div className="sellerInfo__key" key={index}>
                 {key}
               </div>
             ))}
           </div>
         )}
         {productPaymentSellerInfo && (
-          <div style={{ display: 'flex' }}>
-            {Object.values(productPaymentSellerInfo).map((key, index) => (
-              <div style={{ border: '1px solid black', width: '16%' }} key={index}>
-                {key}
+          <div className="sellerInfo__wrapper">
+            {Object.values(productPaymentSellerInfo).map((value, index) => (
+              <div className="sellerInfo__value" key={index}>
+                {value}
               </div>
             ))}
           </div>
         )}
-      </div>
+      </StyledSellerNoInfo>
     </Fragment>
   )
 }
@@ -84,7 +84,6 @@ const SellerSearch = ({ register, watch }: SellerSearchProps) => {
 export default SellerSearch
 
 const StyledSellerSearch = styled.div`
-  width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
@@ -100,5 +99,19 @@ const StyledSellerSearch = styled.div`
 
   .sellerno__search--btn {
     ${buttonHoverAnimation}
+  }
+`
+
+const StyledSellerNoInfo = styled.div`
+  width: 100%;
+
+  .sellerInfo__wrapper {
+    display: flex;
+
+    .sellerInfo__key,
+    .sellerInfo__value {
+      border: '1px solid black';
+      width: '16%';
+    }
   }
 `

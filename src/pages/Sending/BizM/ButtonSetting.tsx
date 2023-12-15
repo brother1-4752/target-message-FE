@@ -2,6 +2,7 @@ import { UseFormRegister } from 'react-hook-form'
 import { BizmInputs } from './BizMSeller'
 import styled from 'styled-components'
 import Asterisk from '../../../components/common/Asterisk'
+import { inputTextFocusAnimation } from '../../../styles/GlobalStyle'
 
 type ButtonSettingProps = { register: UseFormRegister<BizmInputs> }
 
@@ -19,6 +20,7 @@ const ButtonSetting = ({ register }: ButtonSettingProps) => {
               {['버튼 타입', '버튼명', '버튼 URL'].map((tableHeader, index) => (
                 <th className="ddd eee" key={index}>
                   {tableHeader}
+                  <Asterisk />
                 </th>
               ))}
             </tr>
@@ -31,7 +33,7 @@ const ButtonSetting = ({ register }: ButtonSettingProps) => {
                 </select>
               </td>
               <td className="ddd">
-                <input type="text" {...register('buttonName', { required: true })} />
+                <input className="buttonName__input" type="text" {...register('buttonName', { required: true })} />
               </td>
               <td className="ddd buttonUrl__list">
                 {['android', 'ios'].map((os, index) => (
@@ -51,7 +53,7 @@ const ButtonSetting = ({ register }: ButtonSettingProps) => {
                     <label className="buttonUrl__label" htmlFor={device}>
                       {device}
                     </label>
-                    <select defaultValue="http://">
+                    <select className="buttonUrl__select" defaultValue="http://">
                       <option value="http://">http://</option>
                       <option value="https://">https://</option>
                     </select>
@@ -93,7 +95,11 @@ const StyledButtonSetting = styled.div`
       .table__header,
       .table__body {
         display: grid;
-        grid-template-columns: 100px 200px auto;
+        grid-template-columns: 110px 200px auto;
+
+        .buttonName__input {
+          ${inputTextFocusAnimation}
+        }
       }
 
       .buttonUrl__list {
@@ -102,14 +108,25 @@ const StyledButtonSetting = styled.div`
 
         .buttonUrl__listItem {
           width: 100%;
+          display: flex;
+          align-items: center;
+          margin-bottom: ${({ theme }) => theme.spacing.margin000};
 
           .buttonUrl__label {
-            width: 120px;
+            width: 60px;
             margin-right: 8px;
           }
 
+          .buttonUrl__select {
+            margin-right: 8px;
+            text-align: center;
+            width: 80px;
+            opacity: 0.7;
+          }
+
           .buttonUrl__input {
-            width: 50%;
+            ${inputTextFocusAnimation}
+            width: 60%;
           }
         }
       }
@@ -121,6 +138,7 @@ const StyledButtonSetting = styled.div`
     padding: 8px 16px;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
   .eee {
