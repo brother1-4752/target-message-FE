@@ -1,9 +1,14 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import styled from 'styled-components'
+import { useState } from 'react'
 
-import { SendingIcon } from '../../../components/common/Icons/Icons'
-import SellerSearch from './SellerSearch'
+import ReservationSending from './ReservationSending'
+import CampaignSetting from './CampaignSetting'
+import ButtonSetting from './ButtonSetting'
 import ImageSetting from './ImageSetting'
+import SellerSearch from './SellerSearch'
+import BizmHeader from './BizmHeader'
+import DataUpload from './DataUpload'
 
 export type BizmInputs = {
   sellerNo: string // 타겟메세지 상품 결제 셀러 조회용 셀러번호
@@ -21,36 +26,29 @@ export type BizmInputs = {
 
 const BizMSeller = () => {
   //state
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<BizmInputs>({
+  const { register, handleSubmit, watch } = useForm<BizmInputs>({
     defaultValues: {
       buttonType: 'app_link',
     },
   })
+  const [isAtLeastOneFieldFilled, setIsAtLeastOneFieldFilled] = useState(true)
 
   // 페칭 데이터로 초기 값 설정하고 싶을 때
   // useForm({ defaultValues: async () => await fetch() })
 
-  //functions
-
-  //forData submit
-  const onSubmitBizm: SubmitHandler<BizmInputs> = (data) => console.log(data)
+  //form submit
+  const onSubmitBizm: SubmitHandler<BizmInputs> = (data) => {
+    // android, ios, mobile, pc 중 최소 1개 이상의 버튼 링크가 입력되었는지 확인
+    const { androidUrl, iosUrl, mobileUrl, pcUrl } = data
+    const hasAtLeastOneFieldFilled = androidUrl || iosUrl || mobileUrl || pcUrl
+    hasAtLeastOneFieldFilled ? (setIsAtLeastOneFieldFilled(true), console.log(data)) : setIsAtLeastOneFieldFilled(false)
+  }
 
   return (
     <StyledBizMSeller>
       <div className="bizm__wrapper">
-        <header className="bizm__header">
-          <span>
-            <SendingIcon width={20} height={20} />
-          </span>
-          <span>발송 예약 | 비즈엠</span>
-        </header>
+        <BizmHeader />
 
-        {/* TODO: 테스트 후, 폴더 파일 스플리팅 */}
         <form className="bizm__form" onSubmit={handleSubmit(onSubmitBizm)}>
           {/* 셀러번호 검색 */}
           <SellerSearch register={register} watch={watch} />
@@ -59,67 +57,16 @@ const BizMSeller = () => {
           <ImageSetting register={register} watch={watch} />
 
           {/* 버튼 설정 */}
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  {['버튼 타입', '버튼명', '버튼 URL'].map((tableHeader, index) => (
-                    <th key={index}>{tableHeader}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <select defaultValue="app_link" {...register('buttonType')} disabled>
-                      <option value="app_link">앱링크</option>
-                    </select>
-                  </td>
-                  <td>
-                    <input type="text" {...register('buttonName', { required: true })} />
-                  </td>
-                  <td>
-                    {['android', 'ios'].map((os, index) => (
-                      <div key={index}>
-                        <label htmlFor={os}>{os}</label>
-                        {os === 'android' ? (
-                          <input type="text" id={os} {...register('androidUrl', { required: true })} />
-                        ) : (
-                          <input type="text" id={os} {...register('iosUrl', { required: true })} />
-                        )}
-                      </div>
-                    ))}
-                    {['mobile', 'pc'].map((device, index) => (
-                      <div key={index}>
-                        <label htmlFor={device}>{device}</label>
-                        {device === 'mobile' ? (
-                          <input type="text" id={device} {...register('mobileUrl', { required: true })} />
-                        ) : (
-                          <input type="text" id={device} {...register('pcUrl', { required: true })} />
-                        )}
-                      </div>
-                    ))}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
+          <ButtonSetting register={register} />
+          {!isAtLeastOneFieldFilled && <p>버튼 링크 최소 1개를 입력해주세요.</p>}
           {/* 캠페인 설정 */}
-          <div className="campaign__settings" style={{ display: 'flex' }}>
-            <label htmlFor="campaignName">캠페인명</label>
-            <input {...register('campaignName', { required: true })} type="text" id="campaignName" />
-          </div>
+          <CampaignSetting register={register} />
 
           {/* 데이터 업로드 - TODO: 정책 정해지면 그때 반영 */}
+          <DataUpload />
 
           {/* 예약발송 */}
-          <div>
-            <input type="checkbox" />
-            <label htmlFor="reservation">예약발송</label>
-            <input disabled type="text" style={{ width: '20%', height: '20px' }} value={watch('reservation_date')} />
-            <input type="date" id="reservation" {...register('reservation_date')} />
-          </div>
+          <ReservationSending register={register} watch={watch} />
 
           {/* 제출 */}
           <input type="submit" value="발송하기" />
@@ -133,8 +80,8 @@ export default BizMSeller
 
 const StyledBizMSeller = styled.div`
   padding: 32px 0 0 32px;
-  font-size: ${({ theme }) => theme.font.getSize(16)};
-  width: 95%;
+  font-size: ${({ theme }) => theme.font.getSize(14)};
+  width: 93%;
 
   .bizm__wrapper {
     background-color: white;
@@ -143,40 +90,7 @@ const StyledBizMSeller = styled.div`
     box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 5px;
   }
 
-  .bizm__header {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid ${({ theme }) => theme.color.white200};
-    padding: ${({ theme }) => theme.spacing.margin100};
-    gap: 4px;
-  }
-
   .bizm__form {
     padding: ${({ theme }) => theme.spacing.margin100};
-
-    .image__container {
-      display: flex;
-      flex-direction: column;
-      gap: ${({ theme }) => theme.spacing.margin100};
-      margin: ${({ theme }) => theme.spacing.margin100} 0;
-
-      .image__title {
-      }
-
-      .image__description {
-        display: flex;
-        gap: 16px;
-      }
-
-      .image__settings {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-    }
-  }
-
-  .sending__container {
-    display: flex;
   }
 `

@@ -1,5 +1,9 @@
 import { UseFormRegister, UseFormWatch } from 'react-hook-form'
 import { Fragment, MouseEvent, useState } from 'react'
+import styled from 'styled-components'
+
+import { buttonHoverAnimation, inputTextFocusAnimation } from '../../../styles/GlobalStyle'
+import Asterisk from '../../../components/common/Asterisk'
 import { BizmInputs } from './BizMSeller'
 
 //TODO: 실제 API 연동 후 삭제
@@ -43,13 +47,16 @@ const SellerSearch = ({ register, watch }: SellerSearchProps) => {
   return (
     <Fragment>
       {/* 셀러번호 검색 */}
-      <div className="sellerNo__search">
-        <label htmlFor="sellerNo" className="bizm__sellerNo">
+      <StyledSellerSearch>
+        <label htmlFor="sellerNo" className="bizm__sellerno">
           브랜디 셀러번호
+          <Asterisk />
         </label>
         <input type="text" id="sellerNo" {...register('sellerNo', { required: true })} />
-        <button onClick={onClickSellerNo}>검색</button>
-      </div>
+        <button onClick={onClickSellerNo} className="sellerno__search--btn">
+          검색
+        </button>
+      </StyledSellerSearch>
       <div className="sellerNo__info" style={{ width: '100%' }}>
         {productPaymentSellerInfo && (
           <div style={{ display: 'flex' }}>
@@ -75,3 +82,23 @@ const SellerSearch = ({ register, watch }: SellerSearchProps) => {
 }
 
 export default SellerSearch
+
+const StyledSellerSearch = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+
+  .bizm__sellerno {
+    width: 145px;
+    margin-right: ${({ theme }) => theme.spacing.margin300};
+  }
+
+  #sellerNo {
+    ${inputTextFocusAnimation}
+  }
+
+  .sellerno__search--btn {
+    ${buttonHoverAnimation}
+  }
+`
