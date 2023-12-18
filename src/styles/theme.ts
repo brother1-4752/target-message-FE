@@ -2,6 +2,7 @@ import { DefaultTheme } from 'styled-components'
 
 const color = {
   primary100: '#DB4D6E',
+  primary200: 'rgb(219 77 110)',
 
   white100: '#fff',
   white200: '#E9ECEF',
@@ -14,10 +15,13 @@ const color = {
 
   gray100: '#929292',
   gray200: 'rgb(65 66 71)',
+  gray300: 'rgb(222 226 230)',
 
   brown100: '#603C47',
 
   gradient100: 'linear-gradient(90deg, #A8164A 0%, #A8164A 0.01%, #C2255C 45.83%, #F0365C 100%)',
+
+  tableHeaderBg: '#f8f9fa',
 }
 
 const hover = {
@@ -26,7 +30,8 @@ const hover = {
 }
 
 const spacing = {
-  padding100: '12px 16px',
+  padding100: '8px 16px',
+  margin000: '8px',
   margin100: '16px',
   margin200: '24px',
   margin300: '32px',

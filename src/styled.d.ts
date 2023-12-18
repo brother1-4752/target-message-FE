@@ -4,6 +4,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     color: {
       primary100: string
+      primary200: string
 
       white100: string
       white200: string
@@ -16,10 +17,13 @@ declare module 'styled-components' {
 
       gray100: string
       gray200: string
+      gray300: string
 
       brown100: string
 
       gradient100: string
+
+      tableHeaderBg: string
     }
 
     hover: {
@@ -29,6 +33,7 @@ declare module 'styled-components' {
 
     spacing: {
       padding100: string
+      margin000: string
       margin100: string
       margin200: string
       margin300: string

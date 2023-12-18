@@ -1,256 +1,91 @@
+import { SubmitHandler, useForm } from 'react-hook-form'
 import styled from 'styled-components'
-import { HomeIcon, NoImageIcon, SendingIcon } from '../../../components/common/Icons/Icons'
-import { FormEvent, useState } from 'react'
-import Modal from '../../../components/modal/Modal'
-import { ImageType, mockImageCardList } from '../../../constants/mockDatas/mockImageCardList'
-import useInput from '../../../hooks/useInput'
+import { useState } from 'react'
+
+import ReservationSending from './ReservationSending'
+import CampaignSetting from './CampaignSetting'
+import ButtonSetting from './ButtonSetting'
+import ImageSetting from './ImageSetting'
+import SellerSearch from './SellerSearch'
+import BizmHeader from './BizmHeader'
+import DataUpload from './DataUpload'
+import { buttonHoverAnimation } from '../../../styles/GlobalStyle'
+
+export type BizmInputs = {
+  sellerNo: string // 타겟메세지 상품 결제 셀러 조회용 셀러번호
+  imageUrl: string // 이미지 URL
+  imageLink: string // 이미지 클릭 시, 이동할 랜딩페이지 링크
+  buttonType: string // 버튼 타입
+  buttonName: string // 버튼명
+  androidUrl: string // 버튼 url
+  iosUrl: string // 버튼 url
+  mobileUrl: string // 버튼 url
+  pcUrl: string // 버튼 url
+  campaignName: string //캠페인 명
+  reservation_date: string // 예약발송 날짜
+}
 
 const BizMSeller = () => {
-  const [btnName, , onChangeBtnName] = useInput('')
-  const [btnUrl, , onChangeBtnUrl] = useInput('')
-  const [message, , onChangeMessage] = useInput('')
-  const [sendingDate, , onChangeSendingDate] = useInput('')
+  //state
+  const { register, handleSubmit, watch } = useForm<BizmInputs>({
+    defaultValues: {
+      buttonType: 'app_link',
+    },
+  })
+  const [isAtLeastOneFieldFilled, setIsAtLeastOneFieldFilled] = useState(true)
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [imageType, setImageType] = useState<ImageType>('general')
-  //TODO: image_link state 추가 필요
-  const [imageUrl, setImageUrl] = useState<string>('')
-  const [currentImageUrl, setCurrentImageUrl] = useState<string>('')
-  const [test, setTest] = useState<string>('')
+  // 페칭 데이터로 초기 값 설정하고 싶을 때
+  // useForm({ defaultValues: async () => await fetch() })
 
-  const openImageSelectionModal = (event: React.FormEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    setIsModalOpen((prev) => !prev)
-  }
-
-  const onChangeImageTypeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setImageType(event.target.value as ImageType)
-  }
-
-  const onClickImageHandler = (event: React.FormEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    //TODO: 이미지 아이템 중 src가 일치하는 것을 찾아서 해당 이미지를 미리보기에 띄워줘야 함
-    setImageUrl(currentImageUrl)
-    setIsModalOpen(false)
-  }
-
-  const onCheckImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const image_data = event.currentTarget.dataset.imagedata ?? ''
-    const [image_url, image_name] = image_data?.split('+') ?? ['', '', '']
-
-    setCurrentImageUrl(image_url)
-    setTest(image_data)
-  }
-
-  // onSubmit
-  const onsendingClick = (event: FormEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-
-    console.log('btnName: ', btnName)
-    console.log('btnUrl: ', btnUrl)
-    console.log('message: ', message)
-    console.log('sendingDate: ', sendingDate)
-    console.log('imageUrl: ', imageUrl)
-
-    //버튼 데이터 리스트는 하나하나 onChange로 데이터 관리 X, 리스트째로 관리해야 함
-  }
-
-  const onDeleteBtnTableRow = (event: FormEvent<HTMLButtonElement>) => {
-    console.dir(event.currentTarget.parentElement)
-  }
-
-  const deleteImage = (event: FormEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    setImageUrl('')
+  //form submit
+  const onSubmitBizm: SubmitHandler<BizmInputs> = (data) => {
+    // android, ios, mobile, pc 중 최소 1개 이상의 버튼 링크가 입력되었는지 확인
+    const { androidUrl, iosUrl, mobileUrl, pcUrl } = data
+    const hasAtLeastOneFieldFilled = androidUrl || iosUrl || mobileUrl || pcUrl
+    hasAtLeastOneFieldFilled ? (setIsAtLeastOneFieldFilled(true), console.log(data)) : setIsAtLeastOneFieldFilled(false)
   }
 
   return (
     <StyledBizMSeller>
       <div className="bizm__wrapper">
-        <header className="bizm__header">
-          <span>
-            <SendingIcon width={20} height={20} />
-          </span>
-          <span>발송 예약 | 비즈엠</span>
-        </header>
+        <BizmHeader />
 
-        <form className="bizm__form">
-          <div className="image__container">
-            <label className="image__title">이미지 설정</label>
-            <div className="image__description">
-              {imageUrl.length === 0 ? <NoImageIcon /> : <PreviewImage image_url={imageUrl}></PreviewImage>}
-              <div className="image__settings">
-                <div>
-                  <button onClick={openImageSelectionModal}>
-                    <span>
-                      <HomeIcon />
-                    </span>
-                    이미지 선택
-                  </button>
-                  <button onClick={deleteImage}>
-                    <span>
-                      <HomeIcon />
-                    </span>
-                    이미지 삭제
-                  </button>
-                </div>
-                <label htmlFor="image_url">URL 설정</label>
-                <div>
-                  <select name="image_url" id="image_url">
-                    <option value="http://">http://</option>
-                    <option value="https://">https://</option>
-                  </select>
-                  <input type="text" id="image_url" name="image_url" />
-                  <button>URL 테스트</button>
-                </div>
-              </div>
-            </div>
+        <form className="bizm__form" onSubmit={handleSubmit(onSubmitBizm)}>
+          {/* 셀러번호 검색 */}
+          <SellerSearch register={register} watch={watch} />
+
+          {/* 이미지 설정 */}
+          <ImageSetting register={register} watch={watch} />
+
+          {/* 버튼 설정 */}
+          <ButtonSetting register={register} />
+          {!isAtLeastOneFieldFilled && <p>버튼 링크 최소 1개를 입력해주세요.</p>}
+          {/* 캠페인 설정 */}
+          <CampaignSetting register={register} />
+
+          {/* 데이터 업로드 - TODO: 정책 정해지면 그때 반영 */}
+          <DataUpload />
+
+          {/* 예약발송 */}
+          <ReservationSending register={register} watch={watch} />
+
+          {/* 제출 */}
+          <div className="submit__area">
+            <input className="cancel--btn" type="submit" value="취소" />
+            <input className="submit--btn" type="submit" value="발송" />
           </div>
-
-          <div className="button__container">
-            <div className="button__title">버튼 설정</div>
-            <table>
-              <thead>
-                <tr>
-                  {['순번', '버튼타입', '버튼명', '버튼URL', '제거'].map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {/* TODO: 아래 버튼데이터리스트 null없이 모든 필드 필수값으로 채워지면, 
-                각 객체마다 데이터 묶어서 전송 */}
-                {[
-                  { id: 1, type: 'text', name: '버튼1', url: 'http://example1' },
-                  { id: 2, type: 'wl', name: '버튼2', url: 'http://example2' },
-                  // { id: 3, type: null, name: null, url: null },
-                ].map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.id}</td>
-                    <td>
-                      <select defaultValue={item.type ?? ''} required>
-                        <option value="">선택</option>
-                        <option value="text">텍스트</option>
-                        <option value="wl">웹링크</option>
-                      </select>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        placeholder="버튼명"
-                        defaultValue={item.name}
-                        onChange={onChangeBtnName}
-                        required
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        placeholder="버튼 url"
-                        defaultValue={item.url}
-                        onChange={onChangeBtnUrl}
-                        required
-                      />
-                    </td>
-                    <td>
-                      <button onClick={onDeleteBtnTableRow}>-</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div>
-              <button>버튼 추가</button>
-              <button>버튼 전체 삭제</button>
-            </div>
-          </div>
-
-          <div className="message__container">
-            <input type="text" placeholder="기본문구 입력..." onChange={onChangeMessage} />
-          </div>
-
-          <div className="sending__container">
-            <div className="sending__title">발송일자 설정</div>
-            <input type="date" onChange={onChangeSendingDate} />
-          </div>
-
-          <button onClick={onsendingClick}>발송 예약</button>
         </form>
       </div>
-
-      {isModalOpen && (
-        <Modal>
-          <div className="modal__wrapper">
-            <header className="modal__header">
-              <h1>이미지 선택</h1>
-              <button onClick={() => setIsModalOpen(false)}>X</button>
-            </header>
-
-            <input
-              type="radio"
-              name="image_type"
-              id="general"
-              value="general"
-              defaultChecked
-              onChange={onChangeImageTypeHandler}
-            />
-            <label htmlFor="general">일반</label>
-            <input type="radio" name="image_type" id="wide" value="wide" onChange={onChangeImageTypeHandler} />
-            <label htmlFor="wide">와이드</label>
-            <IamgeCardWrapper>
-              {mockImageCardList[imageType].map((item) => (
-                <ImageCardBox key={item.id}>
-                  <img src={item.image_url} alt={item.image_name} />
-                  <p>
-                    <input
-                      type="checkbox"
-                      checked={test === `${item.image_url}+${item.image_name}`}
-                      data-imagedata={`${item.image_url}+${item.image_name}`}
-                      onChange={onCheckImage}
-                    />
-                    {item.image_name}
-                  </p>
-                </ImageCardBox>
-              ))}
-            </IamgeCardWrapper>
-          </div>
-          <div>
-            <button onClick={onClickImageHandler}>선택</button>
-            <button onClick={() => setIsModalOpen(false)}>취소</button>
-          </div>
-        </Modal>
-      )}
     </StyledBizMSeller>
   )
 }
 
 export default BizMSeller
 
-const PreviewImage = styled.div<{ image_url: string }>`
-  width: 100px;
-  height: 100px;
-  /* TODO: 초기 로딩시 No Image 렌더링 */
-  background-image: url(${({ image_url }) => image_url});
-  background-size: cover;
-`
-
-const IamgeCardWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-`
-
-const ImageCardBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-`
-
 const StyledBizMSeller = styled.div`
   padding: 32px 0 0 32px;
-  font-size: ${({ theme }) => theme.font.getSize(16)};
-  width: 95%;
+  font-size: ${({ theme }) => theme.font.getSize(14)};
+  width: 93%;
 
   .bizm__wrapper {
     background-color: white;
@@ -259,40 +94,22 @@ const StyledBizMSeller = styled.div`
     box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 5px;
   }
 
-  .bizm__header {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid ${({ theme }) => theme.color.white200};
-    padding: ${({ theme }) => theme.spacing.margin100};
-    gap: 4px;
-  }
-
   .bizm__form {
     padding: ${({ theme }) => theme.spacing.margin100};
 
-    .image__container {
+    .submit__area {
+      width: 100%;
       display: flex;
-      flex-direction: column;
-      gap: ${({ theme }) => theme.spacing.margin100};
-      margin: ${({ theme }) => theme.spacing.margin100} 0;
-
-      .image__title {
-      }
-
-      .image__description {
-        display: flex;
-        gap: 16px;
-      }
-
-      .image__settings {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      margin: ${({ theme }) => theme.spacing.margin000} 0;
+      .cancel--btn,
+      .submit--btn {
+        ${buttonHoverAnimation}
+        zoom: 1.2;
+        margin: ${({ theme }) => theme.spacing.margin100} 0;
       }
     }
-  }
-
-  .sending__container {
-    display: flex;
   }
 `

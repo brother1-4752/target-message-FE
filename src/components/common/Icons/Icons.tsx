@@ -202,23 +202,36 @@ export const ClockIcon = memo(({ width = 16, height = 16, color, ...rest }: Cust
   </svg>
 ))
 
-export const NoImageIcon = memo(({ width = 100, height = 100, ...rest }: CustomIconProps) => (
+export const NoImageIcon = memo(({ width = 80, height = 80, ...rest }: CustomIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
     height={height}
-    viewBox="0 0 32 32"
-    style={{ fill: theme.color.black300 }}
+    fill="white"
+    stroke="#000"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={1}
+    viewBox="0 0 24 24"
     {...rest}
   >
-    <title>{'no-image'}</title>
-    <path d="M30 3.414 28.586 2 2 28.586 3.414 30l2-2H26a2.003 2.003 0 0 0 2-2V5.414ZM26 26H7.414l7.793-7.793 2.379 2.379a2 2 0 0 0 2.828 0L22 19l4 3.997Zm0-5.832-2.586-2.586a2 2 0 0 0-2.828 0L19 19.168l-2.377-2.377L26 7.414ZM6 22v-3l5-4.997 1.373 1.374 1.416-1.416-1.375-1.375a2 2 0 0 0-2.828 0L6 16.172V6h16V4H6a2.002 2.002 0 0 0-2 2v16Z" />
-    <path
-      d="M0 0h32v32H0z"
-      data-name="&lt;Transparent Rectangle&gt;"
-      style={{
-        fill: 'transparent',
-      }}
-    />
+    <rect width={18} height={18} x={3} y={3} rx={2} />
+    <circle cx={8.5} cy={8.5} r={1.5} />
+    <path d="M20.4 14.5 16 10 4 20" />
+  </svg>
+))
+
+export const DateIcon = memo(({ width = 24, height = 24, color, ...rest }: CustomIconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    stroke={color ?? theme.color.primary100}
+    strokeWidth={2}
+    className="react-daterange-picker__calendar-button__icon react-daterange-picker__button__icon"
+    {...rest}
+  >
+    <path fill="none" d="M2 2h15v15H2z" />
+    <path d="M6 0v4M13 0v4" />
   </svg>
 ))

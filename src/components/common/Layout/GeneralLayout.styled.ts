@@ -16,12 +16,8 @@ export const StyledGeneralLayout = styled.div`
   /* 스몰 디바이스 (작은 스마트폰 등) */
   @media only screen and (max-width: 768px) {
     /* 여기에 768px 미만일 때의 스타일을 작성하세요 */
-    font-size: ${({ theme }) => theme.font.getSize(13)};
-    svg,
-    svg > path {
-      width: ${({ theme }) => theme.font.getSize(13)};
-      height: ${({ theme }) => theme.font.getSize(13)};
-    }
+    zoom: 0.75;
+
     .generallayout__header {
       margin-left: 0;
       width: 100%;
