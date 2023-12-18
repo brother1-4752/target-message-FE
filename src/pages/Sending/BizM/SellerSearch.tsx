@@ -38,10 +38,11 @@ const SellerSearch = ({ register, watch }: SellerSearchProps) => {
   const onClickSellerNo = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
-    const sellerNo = watch('sellerNo')
+    const sellerNo = parseInt(watch('sellerNo'))
 
-    if (sellerNo === '1234') setProductPaymentSellerInfo(mockProductPaymentSellerInfoResponse)
-    else setProductPaymentSellerInfo(null)
+    sellerNo === 1234
+      ? setProductPaymentSellerInfo(mockProductPaymentSellerInfoResponse)
+      : setProductPaymentSellerInfo(null)
   }
 
   return (
@@ -103,7 +104,7 @@ const StyledSellerSearch = styled.div`
 `
 
 const StyledSellerNoInfo = styled.div`
-  width: 70%;
+  width: 100%;
   margin-bottom: ${({ theme }) => theme.spacing.margin100};
 
   .sellerInfo__wrapper {
