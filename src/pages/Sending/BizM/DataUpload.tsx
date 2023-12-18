@@ -5,6 +5,7 @@ import Asterisk from '../../../components/common/Asterisk'
 const DataUpload = () => {
   const onClickTargetData = () => {
     console.log('타겟 모수 조회')
+    return
   }
 
   return (
