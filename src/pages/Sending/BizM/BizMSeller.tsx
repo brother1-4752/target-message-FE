@@ -9,6 +9,7 @@ import ImageSetting from './ImageSetting'
 import SellerSearch from './SellerSearch'
 import BizmHeader from './BizmHeader'
 import DataUpload from './DataUpload'
+import { buttonHoverAnimation } from '../../../styles/GlobalStyle'
 
 export type BizmInputs = {
   sellerNo: string // 타겟메세지 상품 결제 셀러 조회용 셀러번호
@@ -69,7 +70,10 @@ const BizMSeller = () => {
           <ReservationSending register={register} watch={watch} />
 
           {/* 제출 */}
-          <input type="submit" value="발송하기" />
+          <div className="submit__area">
+            <input className="cancel--btn" type="submit" value="취소" />
+            <input className="submit--btn" type="submit" value="발송" />
+          </div>
         </form>
       </div>
     </StyledBizMSeller>
@@ -92,5 +96,20 @@ const StyledBizMSeller = styled.div`
 
   .bizm__form {
     padding: ${({ theme }) => theme.spacing.margin100};
+
+    .submit__area {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      margin: ${({ theme }) => theme.spacing.margin000} 0;
+      .cancel--btn,
+      .submit--btn {
+        ${buttonHoverAnimation}
+        zoom: 1.2;
+        margin: ${({ theme }) => theme.spacing.margin100} 0;
+      }
+    }
   }
 `

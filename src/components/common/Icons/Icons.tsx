@@ -221,7 +221,7 @@ export const NoImageIcon = memo(({ width = 80, height = 80, ...rest }: CustomIco
   </svg>
 ))
 
-export const DateIcon = memo(({ width = 16, height = 16, color, ...rest }: CustomIconProps) => (
+export const DateIcon = memo(({ width = 24, height = 24, color, ...rest }: CustomIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
