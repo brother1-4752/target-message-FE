@@ -48,7 +48,7 @@ declare module 'styled-components' {
         top: string
         margin: string
       }
-      sidebarTable: {
+      sidebarTablet: {
         left: string
         top: string
         margin: string
