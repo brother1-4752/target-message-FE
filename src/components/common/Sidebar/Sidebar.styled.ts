@@ -11,14 +11,4 @@ export const StyledSidebar = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-
-  .sidebar__header {
-    display: flex;
-    height: ${({ theme }) => theme.spacing.sidebarLargeDesktop.top};
-    align-items: center;
-    justify-content: center;
-    padding: ${({ theme }) => theme.spacing.margin100};
-    box-sizing: border-box;
-    border-bottom: 1px solid ${({ theme }) => theme.color.white300};
-  }
 `
