@@ -59,7 +59,7 @@ const SellerSearch = ({ register, watch }: SellerSearchProps) => {
       </StyledSellerSearch>
       <StyledSellerNoInfo>
         {productPaymentSellerInfo && (
-          <div className="sellerInfo__wrapper" style={{ display: 'flex' }}>
+          <div className="sellerInfo__wrapper">
             {Object.keys(productPaymentSellerInfo).map((key, index) => (
               <div className="sellerInfo__key" key={index}>
                 {key}
@@ -103,15 +103,24 @@ const StyledSellerSearch = styled.div`
 `
 
 const StyledSellerNoInfo = styled.div`
-  width: 100%;
+  width: 70%;
+  margin-bottom: ${({ theme }) => theme.spacing.margin100};
 
   .sellerInfo__wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 
     .sellerInfo__key,
     .sellerInfo__value {
-      border: '1px solid black';
-      width: '16%';
+      border: 1px solid ${({ theme }) => theme.color.gray300};
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sellerInfo__key {
+      background-color: #f8f9fa;
     }
   }
 `

@@ -25,7 +25,6 @@ export const buttonHoverAnimation = css`
     align-items: center;
     padding: 5px 15px;
     background-color: ${({ theme }) => theme.color.primary100};
-    border: none;
     border-radius: 4px;
     color: ${({ theme }) => theme.color.white100};
     font-size: ${({ theme }) => theme.font.getSize(12)};
