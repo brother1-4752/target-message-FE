@@ -5,10 +5,14 @@ import { HTMLAttributes } from 'react'
 interface HeaderProps extends HTMLAttributes<HTMLHeadingElement> {}
 
 const Header = (props: HeaderProps) => {
+  const onClickMenuIcon = () => {
+    console.log('메뉴 아이콘 클릭시, 사이드바 토글 구현하기')
+  }
+
   return (
     <StyledHeader {...props} className="generallayout__header">
       <div>
-        <ListMenuIncon style={{ marginLeft: '20px' }} />
+        <ListMenuIncon style={{ marginLeft: '20px', cursor: 'pointer' }} onClick={onClickMenuIcon} />
       </div>
       <div className="header__right">
         <ClockIcon />

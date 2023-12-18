@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { buttonHoverAnimation, inputTextFocusAnimation } from '../../../styles/GlobalStyle'
 import { NoImageIcon } from '../../../components/common/Icons/Icons'
-import Asterisk from '../../../components/common/Asterisk'
+import Asterisk from '../../../components/common/Icons/Asterisk'
 import { BizmInputs } from './BizMSeller'
 
 type ImageSettingProps = {

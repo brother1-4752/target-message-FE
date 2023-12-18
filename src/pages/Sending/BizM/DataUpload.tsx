@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { buttonHoverAnimation, inputTextFocusAnimation } from '../../../styles/GlobalStyle'
-import Asterisk from '../../../components/common/Asterisk'
+import Asterisk from '../../../components/common/Icons/Asterisk'
 
 const DataUpload = () => {
   const onClickTargetData = () => {

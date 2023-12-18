@@ -1,7 +1,7 @@
 import { UseFormRegister } from 'react-hook-form'
 import { BizmInputs } from './BizMSeller'
 import styled from 'styled-components'
-import Asterisk from '../../../components/common/Asterisk'
+import Asterisk from '../../../components/common/Icons/Asterisk'
 import { inputTextFocusAnimation } from '../../../styles/GlobalStyle'
 
 type CampaignSettingProps = {

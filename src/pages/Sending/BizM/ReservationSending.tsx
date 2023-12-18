@@ -1,7 +1,7 @@
 import { UseFormRegister, UseFormWatch } from 'react-hook-form'
 import styled from 'styled-components'
 
-import Asterisk from '../../../components/common/Asterisk'
+import Asterisk from '../../../components/common/Icons/Asterisk'
 import { BizmInputs } from './BizMSeller'
 // import { DateIcon } from '../../../components/common/Icons/Icons'
 

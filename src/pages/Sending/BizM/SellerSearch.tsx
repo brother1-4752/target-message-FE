@@ -3,7 +3,7 @@ import { Fragment, MouseEvent, useState } from 'react'
 import styled from 'styled-components'
 
 import { buttonHoverAnimation, inputTextFocusAnimation } from '../../../styles/GlobalStyle'
-import Asterisk from '../../../components/common/Asterisk'
+import Asterisk from '../../../components/common/Icons/Asterisk'
 import { BizmInputs } from './BizMSeller'
 
 //TODO: 실제 API 연동 후 삭제
