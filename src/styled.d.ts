@@ -22,6 +22,8 @@ declare module 'styled-components' {
       brown100: string
 
       gradient100: string
+
+      tableHeaderBg: string
     }
 
     hover: {

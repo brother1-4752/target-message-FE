@@ -20,6 +20,8 @@ const color = {
   brown100: '#603C47',
 
   gradient100: 'linear-gradient(90deg, #A8164A 0%, #A8164A 0.01%, #C2255C 45.83%, #F0365C 100%)',
+
+  tableHeaderBg: '#f8f9fa',
 }
 
 const hover = {
