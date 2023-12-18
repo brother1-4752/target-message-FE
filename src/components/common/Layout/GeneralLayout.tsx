@@ -11,7 +11,7 @@ const USER_TYPE = 'SELLER'
 const withGeneralLayout = <T extends GeneralLayoutProps<T>>(WrappedComponent: ComponentType<T>) => {
   const GeneralLayout: React.FC<T> = (GeneralLayoutProps) => {
     return (
-      <StyledGeneralLayout>
+      <StyledGeneralLayout className="generallayout__header">
         <Header />
 
         <main className="generallayout__main">

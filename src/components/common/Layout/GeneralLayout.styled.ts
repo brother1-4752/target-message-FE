@@ -7,10 +7,12 @@ export const StyledGeneralLayout = styled.div`
   .generallayout__header,
   .generallayout__main {
     background-color: ${({ theme }) => theme.color.white400};
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 
   .generallayout__main {
     min-height: 100%;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 
   /* 스몰 디바이스 (작은 스마트폰 등) */
@@ -27,14 +29,17 @@ export const StyledGeneralLayout = styled.div`
       svg > path {
         fill: ${({ theme }) => theme.color.white200};
       }
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
 
     .generallayout__main {
       margin: 52px 0 0 0;
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
 
     .generallayout__sidebar {
       width: 0;
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
   }
 
@@ -44,13 +49,16 @@ export const StyledGeneralLayout = styled.div`
     .generallayout__header {
       margin-left: ${({ theme }) => theme.spacing.sidebarDesktop.left};
       width: calc(100% - ${({ theme }) => theme.spacing.sidebarDesktop.left});
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
     .generallayout__main {
       margin: ${({ theme }) => theme.spacing.sidebarDesktop.margin};
       width: calc(100% - ${({ theme }) => theme.spacing.sidebarDesktop.left});
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
     .generallayout__sidebar {
       width: ${({ theme }) => theme.spacing.sidebarDesktop.left};
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
   }
 
