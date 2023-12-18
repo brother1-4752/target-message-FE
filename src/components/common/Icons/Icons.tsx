@@ -220,3 +220,18 @@ export const NoImageIcon = memo(({ width = 80, height = 80, ...rest }: CustomIco
     <path d="M20.4 14.5 16 10 4 20" />
   </svg>
 ))
+
+export const DateIcon = memo(({ width = 16, height = 16, color, ...rest }: CustomIconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    stroke={color ?? theme.color.primary100}
+    strokeWidth={2}
+    className="react-daterange-picker__calendar-button__icon react-daterange-picker__button__icon"
+    {...rest}
+  >
+    <path fill="none" d="M2 2h15v15H2z" />
+    <path d="M6 0v4M13 0v4" />
+  </svg>
+))
