@@ -46,7 +46,7 @@ const spacing = {
     top: '52px',
     margin: '52px 0 0 45px',
   },
-  sidebarTable: {
+  sidebarTablet: {
     left: '0px',
     top: '0px',
     margin: '52px 0 0 0',
