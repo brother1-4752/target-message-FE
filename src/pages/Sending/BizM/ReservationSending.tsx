@@ -23,7 +23,7 @@ const ReservationSending = ({ register, watch }: ReservationSendingProps) => {
         예약발송
         <Asterisk />
       </label>
-      <input className="reservation__input--text" disabled type="text" value={watch('reservation_date')} />
+      <input className="reservation__input--text" disabled type="text" value={watch('reservation_date') ?? ''} />
       <div className="reservation__date--area">
         <input
           className="reservation__input--date"
