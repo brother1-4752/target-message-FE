@@ -16,26 +16,32 @@ type SidebarProps = {
 //   amdinName: string
 // }
 
-// interface SellerInfoResponse {
-//   sellerId: string
-//   sellerNumber: number
-//   sellerName: string
-//   sellerPoint: string
-//   sellerProducts: Product[]
+// const mockAdminInfoResponse: AdminInfoResponse = {
+//   adminId: 'a_1',
+//   adminNumber: 4321,
+//   amdinName: '나나나 관리자',
 // }
 
-// interface Product {
-//   product_id: string
-//   product_name: string
-//   price: string
-//   is_sell: string
-//   img_url: string
-// }
+interface SellerInfoResponse {
+  sellerId: string
+  sellerNumber: number
+  sellerName: string
+  sellerPoint: string
+  sellerProducts: Product[]
+}
 
-export const mockSellerInfoResponse = {
-  sellerId: 's_1', // pk
-  sellerNumber: 1234, // 판매자번호
-  sellerName: '카코카코', // 판매자명
+interface Product {
+  product_id: string
+  product_name: string
+  price: string
+  is_sell: string
+  img_url: string
+}
+
+const mockSellerInfoResponse: SellerInfoResponse = {
+  sellerId: 's_1',
+  sellerNumber: 1234,
+  sellerName: '카코카코',
   sellerPoint: '1230000',
   sellerProducts: [
     {
@@ -54,32 +60,6 @@ export const mockSellerInfoResponse = {
     },
   ],
 }
-
-// const mockAdminInfoResponse: AdminInfoResponse = {
-//   adminId: 'a_1',
-//   adminNumber: 4321,
-//   amdinName: '나나나 관리자',
-// }
-
-//TODO: desktop, tablet, mobile에 따라 다른 UI를 보여주도록 수정
-// const SidebarHeader = () => {
-//   const windowWidth = useWindowWidth()
-
-//   return (
-//     <div className="sidebar__header">
-//       <span>
-//         {windowWidth > 768 && <BrandiIcon width={20} height={20} marginRight="10" />}
-//         {/* TODO: 아래처럼 조건부 거는게 나을지, 아니면 데스크탑/테블릿 나눠서 각각 따로 UI 컴포넌트를 만드는게 나을지 고민하기 */}
-//         {windowWidth > 992 && (
-//           <>
-//             <BrandiTypographyIcon width={80} />
-//             <BizTypographyIcon height={22} width={22} />
-//           </>
-//         )}
-//       </span>
-//     </div>
-//   )
-// }
 
 const SidebarHeader = ({ windowWidth }: { windowWidth: number }) => {
   return (
