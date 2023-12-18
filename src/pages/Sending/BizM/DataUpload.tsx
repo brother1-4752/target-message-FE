@@ -1,8 +1,12 @@
 import styled from 'styled-components'
-import { inputTextFocusAnimation } from '../../../styles/GlobalStyle'
+import { buttonHoverAnimation, inputTextFocusAnimation } from '../../../styles/GlobalStyle'
 import Asterisk from '../../../components/common/Asterisk'
 
 const DataUpload = () => {
+  const onClickTargetData = () => {
+    console.log('타겟 모수 조회')
+  }
+
   return (
     <StyledDataUpload>
       <div className="targetdata__search">
@@ -11,6 +15,9 @@ const DataUpload = () => {
           <Asterisk />
         </label>
         <input className="targetdata__input" id="sellerNo" type="text" placeholder="셀러번호" />
+        <button className="targetdata__search--btn" onClick={onClickTargetData}>
+          조회
+        </button>
       </div>
       <div className="targetdata__table">{/* 셀러번호 기준으로 S3의 최신 모수타겟 리스트 fetching */}</div>
     </StyledDataUpload>
@@ -42,6 +49,10 @@ const StyledDataUpload = styled.div`
       &::placeholder {
         text-align: center;
       }
+    }
+
+    .targetdata__search--btn {
+      ${buttonHoverAnimation}
     }
   }
 `
