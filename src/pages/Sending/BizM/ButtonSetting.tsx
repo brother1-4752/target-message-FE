@@ -18,7 +18,7 @@ const ButtonSetting = ({ register }: ButtonSettingProps) => {
           <thead>
             <tr className="table__header">
               {['버튼 타입', '버튼명', '버튼 URL'].map((tableHeader, index) => (
-                <th className="ddd eee" key={index}>
+                <th className="table__header--data" key={index}>
                   {tableHeader}
                   <Asterisk />
                 </th>
@@ -27,15 +27,15 @@ const ButtonSetting = ({ register }: ButtonSettingProps) => {
           </thead>
           <tbody>
             <tr className="table__body">
-              <td className="ddd">
+              <td className="table__body--data">
                 <select defaultValue="app_link" {...register('buttonType')} disabled>
                   <option value="app_link">앱링크</option>
                 </select>
               </td>
-              <td className="ddd">
+              <td className="table__body--data">
                 <input className="buttonName__input" type="text" {...register('buttonName', { required: true })} />
               </td>
-              <td className="ddd buttonUrl__list">
+              <td className="table__body--data buttonUrl__list">
                 {['android', 'ios'].map((os, index) => (
                   <div className="buttonUrl__listItem" key={index}>
                     <label className="buttonUrl__label" htmlFor={os}>
@@ -133,7 +133,8 @@ const StyledButtonSetting = styled.div`
     }
   }
 
-  .ddd {
+  .table__header--data,
+  .table__body--data {
     border: 1px solid ${({ theme }) => theme.color.gray300};
     padding: 8px 16px;
     display: flex;
@@ -141,7 +142,7 @@ const StyledButtonSetting = styled.div`
     justify-content: center;
   }
 
-  .eee {
+  .table__header--data {
     background-color: #f8f9fa;
   }
 `
